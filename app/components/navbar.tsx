@@ -74,7 +74,7 @@ export default function Navbar({
           alt="Logo Icon"
           width={80}
           height={80}
-          className="w-8 lg:w-full h-8"
+          className="w-16 lg:w-full h-8"
           src={"/next.svg"}
           priority
           sizes={"(max-width: 640px) 70px, 100px"}
@@ -168,8 +168,8 @@ export default function Navbar({
           onClick={() => setNavbarExpanded(true)}
         >
           <Image
-            height={32}
-            width={32}
+            height={28}
+            width={28}
             src="/assets/icons/menu.svg"
             alt="Menu Icon"
           />
