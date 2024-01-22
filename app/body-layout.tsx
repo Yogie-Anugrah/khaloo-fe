@@ -1,6 +1,5 @@
 "use client";
 import Footer from "@/app/components/footer";
-import Navbar from "@/app/components/navbar";
 import { useState } from "react";
 
 export default function BodyLayout({
@@ -16,10 +15,6 @@ export default function BodyLayout({
         navBarExpanded && "overflow-hidden"
       }`}
     >
-      <Navbar
-        navBarExpanded={navBarExpanded}
-        setNavbarExpanded={setNavBarExpanded}
-      />
       {children}
       <Footer />
     </body>
