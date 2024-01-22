@@ -60,8 +60,8 @@ export default function Navbar({
   return (
     <nav
       aria-label="Navbar"
-      className="bg-[#D2D1D1] text-black sticky top-0 font-poppins z-50 flex w-full flex-row items-center justify-between px-5
-      py-3 lg:py-5 overflow-hidden"
+      className="bg-[#D2D1D1] text-black sticky top-0 font-poppins z-50 flex w-full flex-row items-center justify-between px-8
+      py-4 lg:py-5 md:px-10 xl:px-20 overflow-hidden"
     >
       {/* Logo */}
       <Link
@@ -74,7 +74,7 @@ export default function Navbar({
           alt="Logo Icon"
           width={80}
           height={80}
-          className="w-16 lg:w-full h-8"
+          className="w-20 lg:w-full h-7 object-center object-contain"
           src={"/next.svg"}
           priority
           sizes={"(max-width: 640px) 70px, 100px"}
@@ -93,7 +93,7 @@ export default function Navbar({
         <div className="flex flex-col lg:flex-row flex-1 max-lg:gap-5 ">
           {/* Close Menu Mobile Button */}
           <button
-            className="ml-auto lg:hidden"
+            className="ml-auto mr-4 lg:hidden"
             onClick={() => setNavbarExpanded(false)}
             aria-label="Close Menu"
             data-cy="navbar-close"
