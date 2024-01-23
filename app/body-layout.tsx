@@ -1,5 +1,5 @@
 "use client";
-import Footer from "@/app/components/footer";
+import Footer from "@/components/footer";
 import { useState } from "react";
 
 export default function BodyLayout({
