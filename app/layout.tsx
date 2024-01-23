@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/app/components/navbar";
+import Navbar from "@/components/navbar";
 import BodyLayout from "@/app/body-layout";
 
 const inter = Inter({
