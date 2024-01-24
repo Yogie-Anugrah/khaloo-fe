@@ -1,18 +1,18 @@
-import clsx from "clsx";
-import { HTMLInputTypeAttribute } from "react";
+import clsx from 'clsx';
+import { HTMLInputTypeAttribute } from 'react';
 
 const Input = ({
   placeholder,
   type,
-  variant = "default",
+  variant = 'default',
 }: {
   placeholder: string;
   type: HTMLInputTypeAttribute;
-  variant?: "username" | "default";
+  variant?: 'username' | 'default';
 }) => {
   const variantStyle = {
-    username: "bg-white border-[1px] border-[#323232]",
-    default: "bg-[#F0F0F0]",
+    username: 'bg-white border-[1px] border-[#323232]',
+    default: 'bg-[#F0F0F0]',
   };
 
   return (
@@ -20,7 +20,7 @@ const Input = ({
       type={type}
       placeholder={placeholder}
       className={clsx(
-        "rounded-lg w-full placeholder:text-[#585857] text-black text-base xl:text-lg px-4 py-3 xl:px-4 xl:py-[18px]",
+        'w-full rounded-lg px-4 py-3 text-base text-black placeholder:text-[#585857] xl:px-4 xl:py-[18px] xl:text-lg',
         variantStyle[variant]
       )}
     />

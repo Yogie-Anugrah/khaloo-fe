@@ -1,143 +1,181 @@
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
+import clsx from 'clsx';
+import Image from 'next/image';
+import Link from 'next/link';
+import React from 'react';
 
-const footerLinks = [
+const socialMedias = [
   {
-    title: "Khaloo",
+    title: 'Khaloo',
     links: [
       {
-        title: "About Us",
-        href: "/about-us",
+        title: 'About Us',
+        href: '/about-us',
       },
       {
-        title: "Partner With Us",
-        href: "/partner-with-us",
+        title: 'Partner With Us',
+        href: '/partner-with-us',
       },
       {
-        title: "Our Store",
-        href: "/our-store",
+        title: 'Our Store',
+        href: '/our-store',
       },
     ],
   },
   {
-    title: "Information",
+    title: 'Information',
     links: [
       {
-        title: "FAQ",
-        href: "/faq",
+        title: 'FAQ',
+        href: '/faq',
       },
       {
-        title: "Career",
-        href: "/career",
+        title: 'Career',
+        href: '/career',
       },
       {
-        title: "Terms & Condition",
-        href: "/terms-condition",
+        title: 'Terms & Condition',
+        href: '/terms-condition',
       },
       {
-        title: "Privacy Policy",
-        href: "/privacy-policy",
+        title: 'Privacy Policy',
+        href: '/privacy-policy',
       },
     ],
   },
 ];
 
-const footerLinkIcons = [
+const onlineStores = [
   {
-    title: "Contact & Follow Us",
+    title: 'Contact & Follow Us',
     icons: [
       {
-        link: "https://instagram.com/khaloobeauty/",
-        url: "/assets/icons/instagram.svg",
-        alt: "Instagram",
+        link: 'https://www.instagram.com/khaloobeauty/?hl=en',
+        url: '/assets/icons/instagram.svg',
+        alt: 'Instagram',
         width: 20,
         height: 20,
       },
       {
-        link: "https://www.linkedin.com/company/khaloobeauty/",
-        url: "/assets/icons/linkedin.svg",
-        alt: "linkedin",
+        link: 'https://www.linkedin.com/company/khaloobeauty/',
+        url: '/assets/icons/linkedin.svg',
+        alt: 'linkedin',
         width: 20,
         height: 20,
       },
       {
-        link: "https://www.tiktok.com/@khaloo.beauty",
-        url: "/assets/icons/tiktok.svg",
-        alt: "tiktok",
+        link: 'https://www.tiktok.com/@khaloo.beauty',
+        url: '/assets/icons/tiktok.svg',
+        alt: 'tiktok',
         width: 20,
         height: 20,
       },
       {
-        link: "https://wa.me/6281399230269?text=Hallo+Admin",
-        url: "/assets/icons/whatsapp.svg",
-        alt: "whatsapp",
+        link: 'https://www.facebook.com/people/Khaloo-Beauty/100083609192190/?fref=nf',
+        url: '/assets/icons/facebook.svg',
+        alt: 'facebook',
+        width: 25,
+        height: 25,
+      },
+      {
+        link: 'http://tiny.cc/wakhaloo',
+        url: '/assets/icons/whatsapp.svg',
+        alt: 'whatsapp',
         width: 20,
         height: 20,
       },
     ],
   },
   {
-    title: "Our Online Stores",
+    title: 'Our Online Stores',
     icons: [
       {
-        link: "/",
-        url: "/assets/images/tokopedia.png",
-        alt: "instagram",
-        width: 32,
-        height: 32,
+        link: 'http://tiny.cc/profiletokopediakhaloo',
+        url: '/assets/images/tokopedia.png',
+        alt: 'tokopedia',
+        width: 40,
+        height: 40,
       },
       {
-        link: "/",
-        url: "/assets/images/tokopedia.png",
-        alt: "instagram",
-        width: 32,
-        height: 32,
+        link: 'http://tiny.cc/profileshopeekhaloo',
+        url: '/assets/icons/shopee.svg',
+        alt: 'shopee',
+        width: 40,
+        height: 40,
       },
       {
-        link: "/",
-        url: "/assets/images/tokopedia.png",
-        alt: "instagram",
-        width: 32,
-        height: 32,
+        link: 'http://tiny.cc/profilebliblikhaloo',
+        url: '/assets/icons/blibli.svg',
+        alt: 'blibli',
+        width: 40,
+        height: 40,
+      },
+      {
+        link: 'http://tiny.cc/profilelazadakhaloo',
+        url: '/assets/icons/lazada.svg',
+        alt: 'lazada',
+        width: 40,
+        height: 40,
       },
     ],
+  },
+];
+
+const certifications = [
+  {
+    src: '/assets/images/halal.png',
+    alt: 'Sertifikasi Halal',
+    width: 50,
+    height: 50,
+  },
+  {
+    src: '/assets/images/bpom.png',
+    alt: 'Sertifikasi BPOM',
+    width: 50,
+    height: 50,
+  },
+  {
+    src: '/assets/images/no-animal.png',
+    alt: 'Sertifikasi No Animal',
+    width: 65,
+    height: 50,
   },
 ];
 
 export default function Footer() {
   return (
-    <footer className="flex flex-col bg-[#D2D1D1] text-black font-poppins px-8 md:px-12 lg:px-20 py-10">
+    <footer className='flex flex-col bg-[#E6E6E6] px-8 py-10 text-black md:px-12 lg:px-20'>
       {/* Upper Main Content */}
-      <div className="flex flex-col xl:flex-row pb-5 gap-10 justify-around text-base lg:text-lg">
+      <div className='flex flex-col justify-around gap-10 pb-5 text-base lg:text-lg xl:flex-row'>
         {/* Subcription Content */}
-        <div className="flex flex-col gap-1 max-xl items-center">
-          <p className="font-bold text-2xl">Ikuti Berita terbaru Khaloo</p>
-          <p className="font-semibold text-base">
+        <div className='max-xl flex flex-col items-center gap-1'>
+          <p className='text-2xl font-bold text-primary-2'>
+            Ikuti Berita terbaru Khaloo
+          </p>
+          <p className='text-base font-semibold text-secondary-1'>
             Dapatkan diskon 10% pembelian pertama
           </p>
           {/* Mailchimp subcription */}
-          <div className="flex flex-col xl:bg-white lg:flex-row items-center max-lg:gap-3 mt-3 rounded-lg w-fit">
+          <div className='mt-3 flex w-fit flex-col items-center rounded-lg max-lg:gap-3 lg:flex-row xl:bg-white'>
             <input
-              type="text"
-              className="bg-white max-xl:rounded-lg xl:rounded-l-lg py-2 px-4 md:max-xl:w-80"
-              placeholder="Email"
+              type='text'
+              className='bg-white px-4 py-2 max-xl:rounded-lg md:max-xl:w-80 xl:rounded-l-lg'
+              placeholder='Alamat Email'
             />
-            <button className="bg-[#434242] m-auto text-white rounded-lg py-2 px-5 font-bold ">
+            <button className='m-auto rounded-lg bg-secondary-1 px-5 py-2 font-bold text-white'>
               Subscribe
             </button>
           </div>
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-5 md:gap-10 justify-around">
+        <div className='grid grid-cols-2 justify-around gap-5 sm:grid-cols-4 md:gap-10'>
           {/* Mapping link content */}
-          {footerLinks.map((footerLink) => (
-            <div key={footerLink.title} className="flex flex-col md:gap-1">
+          {socialMedias.map((footerLink) => (
+            <div key={footerLink.title} className='flex flex-col md:gap-1'>
               {/* Title section  */}
-              <p className="font-bold">{footerLink.title}</p>
+              <p className='font-bold text-primary-2'>{footerLink.title}</p>
               {/* Content link */}
               {footerLink.links.map((link) => (
                 <Link
-                  className="font-medium hover:underline"
+                  className='font-medium hover:underline'
                   key={link.title}
                   href={link.href}
                 >
@@ -148,28 +186,35 @@ export default function Footer() {
           ))}
 
           {/* Mapping blank target link social */}
-          <div className="flex flex-col gap-6 text-base lg:text-lg">
-            {footerLinkIcons.map((footerLinkIcon) => (
+          <div className='flex flex-col  gap-6 text-base lg:text-lg'>
+            {onlineStores.map((footerLinkIcon, index) => (
               <div
                 key={footerLinkIcon.title}
-                className="flex flex-col md:gap-1"
+                className='flex flex-col md:gap-1'
               >
                 {/* Title section  */}
-                <p className="font-bold">{footerLinkIcon.title}</p>
+                <p className='font-bold text-primary-2'>
+                  {footerLinkIcon.title}
+                </p>
                 {/* Content Link Icon*/}
-                <div className="flex flex-wrap gap-3 xl:gap-5 items-center">
+                <div className='flex flex-wrap items-center gap-3 xl:gap-5'>
                   {footerLinkIcon.icons.map((icon) => (
                     <Link
                       key={icon.url}
                       href={icon.link}
-                      target="_blank"
-                      className=" hover:scale-105 duration-300 transition-all"
+                      target='_blank'
+                      className='transition-all duration-300 hover:scale-105'
                     >
                       <Image
                         src={icon.url}
                         alt={icon.alt}
                         width={icon.width}
                         height={icon.height}
+                        sizes={icon.width + 'px'}
+                        className={clsx(
+                          'aspect-square object-contain object-center',
+                          index == 1 && 'rounded-md bg-white p-1'
+                        )}
                       />
                     </Link>
                   ))}
@@ -179,14 +224,15 @@ export default function Footer() {
           </div>
           {/* Internationalization */}
           <Link
-            href="/id/"
-            className="font-bold hover:underline text-base lg:text-lg inline-flex gap-1 items-center h-fit"
+            href='/id/'
+            className='inline-flex h-fit items-center gap-1 text-base font-bold text-secondary-1 hover:underline lg:text-lg'
           >
             <Image
-              src="/assets/icons/language.svg"
-              alt="indonesia"
+              src='/assets/icons/language.svg'
+              alt='indonesia'
               width={20}
               height={20}
+              sizes='20px'
             />
             Indonesia
           </Link>
@@ -194,12 +240,21 @@ export default function Footer() {
       </div>
 
       {/* Footer Copyright */}
-      <div className="flex flex-col sm:flex-row gap-3 justify-between pt-5 border-t-[3px] border-black">
-        <p className="text-sm lg:text-base">Copyright PT.XXXXX</p>
-        <ul className="flex gap-4 font-bold text-base lg:text-lg">
-          <li>Halal</li>
-          <li>BPOM</li>
-          <li>Animal Safe</li>
+      <div className='flex flex-col items-center justify-between gap-3 border-t-[2px] border-black pt-5 sm:flex-row'>
+        <p className='text-sm font-bold lg:text-base'>Copyright PT.Khaloo</p>
+        <ul className='flex gap-4 text-base font-bold lg:text-lg'>
+          {certifications.map((image) => {
+            return (
+              <Image
+                key={image.alt}
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                className='rounded-md bg-white object-contain object-center'
+              />
+            );
+          })}
         </ul>
       </div>
     </footer>
