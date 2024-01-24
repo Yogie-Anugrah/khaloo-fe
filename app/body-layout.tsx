@@ -1,6 +1,6 @@
-"use client";
-import Navbar from "@/components/navbar";
-import { useState } from "react";
+'use client';
+import Navbar from '@/components/navbar';
+import { useState } from 'react';
 
 export default function BodyLayout({
   children,
@@ -12,7 +12,7 @@ export default function BodyLayout({
   return (
     <body
       className={`flex min-h-screen flex-col ${
-        navBarExpanded && "overflow-hidden"
+        navBarExpanded && 'overflow-hidden'
       }`}
     >
       <Navbar
