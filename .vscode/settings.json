@@ -9,5 +9,9 @@
     "typescript.preferences.importModuleSpecifier": "non-relative",
     "WillLuke.nextjs.hasPrompted": true
     // End Line
+<<<<<<< HEAD
   }
   
+=======
+  }
+>>>>>>> b9154c7b992246be434016a3fc80bcd8ec013a0b
