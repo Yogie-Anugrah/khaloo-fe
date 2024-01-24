@@ -20,8 +20,12 @@ const navData = [
     path: "/edu-skin",
   },
   {
-    name: "PARTNER WITH US",
+    name: "PARTNERSHIP",
     path: "/partner-with-us",
+  },
+  {
+    name: "LOCATION",
+    path: "/location",
   },
 ];
 
@@ -61,7 +65,7 @@ export default function Navbar({
     <nav
       aria-label="Navbar"
       className="font-poppins sticky top-0 z-50 flex w-full flex-row items-center justify-between gap-4 overflow-hidden bg-white
-      px-4 py-4 text-black md:px-10 lg:py-5 xl:px-20"
+      px-4 py-4 text-black md:px-6 md:py-5 xl:px-20"
     >
       {/* Logo */}
       <Link
@@ -85,15 +89,15 @@ export default function Navbar({
       <div
         data-cy="navbar-expanded"
         className={`fixed right-0 top-0 z-10 flex h-full transform flex-col gap-6
-        border-l-2 border-gray-3 bg-white p-5 text-base transition-all duration-300 ease-in-out max-lg:w-[60%]
-        lg:static lg:h-auto lg:w-auto lg:flex-1 lg:translate-x-0 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:border-none lg:bg-transparent lg:p-0 lg:text-lg ${
+        border-l-2 border-gray-3 bg-white p-5 text-base transition-all duration-300 ease-in-out max-md:w-[60%]
+        md:static md:h-auto md:w-auto md:flex-1 md:translate-x-0 md:flex-row md:items-center md:justify-between md:gap-12 md:border-none md:bg-transparent md:p-0 lg:text-lg xl:text-xl 2xl:text-2xl ${
           navBarExpanded ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex flex-1 flex-col max-lg:gap-5 lg:flex-row ">
           {/* Close Menu Mobile Button */}
           <button
-            className="ml-auto mr-4 lg:hidden"
+            className="ml-auto mr-4 md:hidden"
             onClick={() => setNavbarExpanded(false)}
             aria-label="Close Menu"
             data-cy="navbar-close"
@@ -112,13 +116,13 @@ export default function Navbar({
           </button>
 
           {/* Map data navigation */}
-          <ul className="flex flex-1 flex-col items-center gap-5 font-medium lg:flex-row lg:justify-center lg:gap-12 xl:gap-28">
+          <ul className="flex flex-1 flex-col items-center gap-5 font-medium md:flex-row md:justify-center md:gap-5 lg:gap-9 xl:gap-12 2xl:gap-20">
             {navData.map((item) => {
               return (
                 <li
                   key={item.name}
                   className={clsx(
-                    "transition-all duration-300 hover:underline hover:underline-offset-8 ",
+                    "text-center transition-all duration-300 hover:underline hover:underline-offset-8 ",
                     pathname == item.path
                       ? "font-bold text-primary-2"
                       : "font-medium"
@@ -148,7 +152,7 @@ export default function Navbar({
 
       <div className="flex flex-shrink-0 items-center justify-center gap-3 font-medium">
         {/* Search and Person */}
-        <div className="flex items-center justify-center gap-2 sm:gap-3 lg:gap-6">
+        <div className="flex items-center justify-center gap-2 sm:gap-2 lg:gap-4 2xl:gap-5">
           <Image
             height={32}
             width={32}
@@ -174,7 +178,7 @@ export default function Navbar({
               className="aspect-square w-6 sm:w-7"
               sizes="(max-width: 640px) 24px, 32px"
             />
-            <p className="hidden hover:underline hover:underline-offset-4 lg:flex">
+            <p className="hidden hover:underline hover:underline-offset-4 lg:flex text-base xl:text-lg 2xl:text-xl">
               INA
             </p>
           </button>
@@ -184,7 +188,7 @@ export default function Navbar({
         <button
           data-cy="navbar-toggle"
           aria-label="Menu"
-          className="lg:hidden"
+          className="md:hidden"
           onClick={() => setNavbarExpanded(true)}
         >
           <Image
@@ -202,7 +206,7 @@ export default function Navbar({
         <div
           ref={sideBarBgRef}
           data-cy="navbar-side-bar-bg"
-          className="fixed inset-0 z-0 h-full w-full bg-opacity-80 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-0 h-full w-full bg-opacity-80 backdrop-blur-sm md:hidden"
         />
       )}
     </nav>
