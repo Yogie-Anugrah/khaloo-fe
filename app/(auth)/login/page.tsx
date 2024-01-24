@@ -5,7 +5,11 @@ import React from 'react';
 
 export default function SignUpPage() {
   return (
+<<<<<<< HEAD
     <main className='flex min-h-screen bg-white font-poppins text-base font-medium text-black xl:text-lg'>
+=======
+    <main className='flex min-h-screen bg-white text-base font-medium text-black xl:text-lg'>
+>>>>>>> ac7ad1944f680e078eabb55657d785d4835aa128
       <div className='flex h-auto w-[3/5] flex-1 flex-col justify-center gap-14 px-8 sm:px-12 md:px-14 xl:gap-16 xl:px-20'>
         {/* Title */}
         <h1 className='text-5xl font-extrabold max-md:text-center xl:text-7xl'>
