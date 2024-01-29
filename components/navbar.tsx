@@ -1,10 +1,10 @@
 "use client";
-
+import SearchNavbar from "@/components/search-navbar";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { type Dispatch, type SetStateAction, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const navData = [
   {
@@ -29,18 +29,20 @@ const navData = [
   },
 ];
 
-export default function Navbar({
-  navBarExpanded,
-  setNavbarExpanded,
-}: {
-  navBarExpanded: boolean;
-  setNavbarExpanded: Dispatch<SetStateAction<boolean>>;
-}) {
-  // Managing state open for the navbar
+export default function Navbar() {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isSearchResultOpen, setIsSearchResultOpen] = useState(false);
+  const [navBarExpanded, setNavbarExpanded] = useState(false);
 
   // Side Bar background ref
   const sideBarBgRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
+
+  // Todo: Tergantung how to fetch the data from the backend we can use useParams if backend have query to filter data
+  // Todo : or we can use state to filter the data on the client side
+
+  // Implement option 2
+  const [searchResult, setSearchResult] = useState("");
 
   // Close Navbar when user clicks on black background stuffs
   useEffect(() => {
@@ -51,6 +53,8 @@ export default function Navbar({
         sideBarBgRef.current.contains(event.target as Node)
       ) {
         setNavbarExpanded(false);
+        setIsSearchOpen(false);
+        setIsSearchResultOpen(false);
       }
     }
     // Bind the event listener
@@ -61,10 +65,19 @@ export default function Navbar({
     };
   }, [setNavbarExpanded]);
 
+  // Overflow hidden when search result is open
+  useEffect(() => {
+    if (isSearchResultOpen || navBarExpanded) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isSearchResultOpen, navBarExpanded]);
+
   return (
     <nav
       aria-label="Navbar"
-      className="font-poppins sticky top-0 z-50 flex w-full flex-row items-center justify-between gap-4 overflow-hidden bg-white
+      className="font-poppins sticky top-0 z-50 flex w-full flex-row items-center justify-between gap-4 bg-white
       px-4 py-4 text-black md:px-6 md:py-5 xl:px-20"
     >
       {/* Logo */}
@@ -88,7 +101,7 @@ export default function Navbar({
       {/* Display URL Navigation */}
       <div
         data-cy="navbar-expanded"
-        className={`fixed right-0 top-0 z-10 flex h-full transform flex-col gap-6
+        className={`fixed right-0 top-0 z-10 flex h-full transform flex-col gap-6 
         border-l-2 border-gray-3 bg-white p-5 text-base transition-all duration-300 ease-in-out max-md:w-[60%]
         md:static md:h-auto md:w-auto md:flex-1 md:translate-x-0 md:flex-row md:items-center md:justify-between md:gap-12 md:border-none md:bg-transparent md:p-0 lg:text-lg xl:text-xl 2xl:text-2xl ${
           navBarExpanded ? "translate-x-0" : "translate-x-full"
@@ -116,7 +129,12 @@ export default function Navbar({
           </button>
 
           {/* Map data navigation */}
-          <ul className="flex flex-1 flex-col items-center gap-5 font-medium md:flex-row md:justify-center md:gap-5 lg:gap-9 xl:gap-12 2xl:gap-20">
+          <ul
+            className={clsx(
+              "flex flex-1 flex-col items-center gap-5 font-medium md:flex-row md:justify-center md:gap-5 lg:gap-9 xl:gap-12 2xl:gap-20",
+              isSearchOpen ? "hidden" : "flex"
+            )}
+          >
             {navData.map((item) => {
               return (
                 <li
@@ -153,13 +171,27 @@ export default function Navbar({
       <div className="flex flex-shrink-0 items-center justify-center gap-3 font-medium">
         {/* Search and Person */}
         <div className="flex items-center justify-center gap-2 sm:gap-2 lg:gap-4 2xl:gap-5">
-          <Image
-            height={32}
-            width={32}
-            src="/assets/icons/search.svg"
-            alt="Search Icon"
-            className="aspect-square w-7 sm:w-8"
-            sizes="(max-width: 640px) 28px, 32px"
+          <button
+            onClick={() => {
+              setIsSearchOpen((prev) => !prev);
+              setIsSearchResultOpen(true);
+            }}
+          >
+            <Image
+              height={32}
+              width={32}
+              src="/assets/icons/search.svg"
+              alt="Search Icon"
+              className="aspect-square w-7 sm:w-8"
+              sizes="(max-width: 640px) 28px, 32px"
+            />
+          </button>
+          <SearchNavbar
+            searchResult={searchResult}
+            setIsSearchResultOpen={setIsSearchResultOpen}
+            setSearchResult={setSearchResult}
+            isSearchOpen={isSearchOpen}
+            isSearchResultOpen={isSearchResultOpen}
           />
           <Image
             height={32}
@@ -202,13 +234,18 @@ export default function Navbar({
       </div>
 
       {/* Side bar opaque background */}
-      {navBarExpanded && (
-        <div
-          ref={sideBarBgRef}
-          data-cy="navbar-side-bar-bg"
-          className="fixed inset-0 z-0 h-full w-full bg-opacity-80 backdrop-blur-sm md:hidden"
-        />
-      )}
+      <div
+        ref={sideBarBgRef}
+        data-cy="navbar-side-bar-bg"
+        className={clsx(
+          "fixed inset-0 z-0 h-full w-full bg-opacity-80 backdrop-blur-sm",
+          isSearchResultOpen
+            ? "visible bg-black"
+            : navBarExpanded
+            ? "visible md:hidden"
+            : "hidden"
+        )}
+      />
     </nav>
   );
 }
