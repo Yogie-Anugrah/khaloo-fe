@@ -121,7 +121,8 @@ export default function UserSignUpModal() {
           onClick={() => router.back()}
           className={clsx(
             'appearance-none',
-            Boolean(step === StepEnum.EMAIL) && 'ml-auto'
+            Boolean(step !== StepEnum.EMAIL && step < StepEnum.VERIFICATION) &&
+              'ml-auto'
           )}
         >
           <Image
@@ -179,7 +180,7 @@ export default function UserSignUpModal() {
                         className='flex-1 truncate outline-none placeholder:text-gray-1'
                       />
                       <button
-                        className='flex-shrink-0 font-semibold text-primary-2'
+                        className='flex-shrink-0 font-bold text-primary-2'
                         onClick={() =>
                           index === 0
                             ? setShowPassword((prev) => !prev)
@@ -331,7 +332,7 @@ export default function UserSignUpModal() {
           <h2 className='text-2xl font-bold text-primary-2 lg:text-3xl 2xl:text-4xl'>
             Yey Kamu berhasil daftar!
           </h2>
-          <button className=' w-full rounded-xl bg-primary-1 p-3 font-medium lg:px-5 lg:py-4 xl:text-lg'>
+          <button className=' w-full rounded-xl bg-primary-1 p-3 font-bold lg:px-5 lg:py-4 xl:text-lg'>
             <Link href='/'>Alhamdulillah</Link>
           </button>
         </div>

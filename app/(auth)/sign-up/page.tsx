@@ -122,7 +122,9 @@ export default function UserSignUpPage() {
             onClick={() => router.back()}
             className={clsx(
               'appearance-none',
-              Boolean(step === StepEnum.EMAIL) && 'ml-auto'
+              Boolean(
+                step !== StepEnum.EMAIL && step < StepEnum.VERIFICATION
+              ) && 'ml-auto'
             )}
           >
             <Image
@@ -272,7 +274,7 @@ export default function UserSignUpPage() {
               )}
               {/* Submit Button */}
               <button
-                className=' w-full rounded-xl bg-primary-1 p-3 font-medium lg:px-5 lg:py-4 xl:text-lg'
+                className=' w-full rounded-xl bg-primary-1 p-3 font-bold lg:px-5 lg:py-4 xl:text-lg'
                 type={step === StepEnum.DATEBIRTH ? 'submit' : 'button'}
                 onClick={() => {
                   if (Boolean(step !== StepEnum.DATEBIRTH)) {
@@ -335,7 +337,7 @@ export default function UserSignUpPage() {
             <h2 className='text-2xl font-bold text-primary-2 lg:text-3xl 2xl:text-4xl'>
               Yey Kamu berhasil daftar!
             </h2>
-            <button className=' w-full rounded-xl bg-primary-1 p-3 font-medium lg:px-5 lg:py-4 xl:text-lg'>
+            <button className=' w-full rounded-xl bg-primary-1 p-3 font-bold lg:px-5 lg:py-4 xl:text-lg'>
               <Link href='/'>Alhamdulillah</Link>
             </button>
           </div>
