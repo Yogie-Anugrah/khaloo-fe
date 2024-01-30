@@ -42,7 +42,7 @@ export default function ModalLayout({
   return (
     <dialog
       ref={dialogRef}
-      className='flex w-[80%] max-w-[765px] flex-col gap-8 rounded-2xl bg-white px-6 py-5 sm:px-8 sm:py-6 md:px-10 md:py-8 lg:gap-12 lg:rounded-3xl lg:px-12 lg:py-10 2xl:gap-16 2xl:px-16 2xl:py-12'
+      className='flex w-[80%] max-w-[700px] flex-col gap-8 rounded-2xl bg-white px-6 py-5 sm:px-8 sm:py-6 md:px-10 md:py-8 lg:gap-12 lg:rounded-3xl lg:px-12 lg:py-10 2xl:px-16 2xl:py-12'
       onClose={onDismiss}
     >
       {children}
