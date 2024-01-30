@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang='en' className={poppins.className}>
       <body>
         {modal}
-        {/* {children} */}
+        {children}
       </body>
     </html>
   );
