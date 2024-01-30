@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
 import './globals.css';
-import BodyLayout from '@/app/body-layout';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -17,12 +16,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang='en' className={poppins.className}>
-      <BodyLayout>{children}</BodyLayout>
+      <body>
+        {modal}
+        {children}
+      </body>
     </html>
   );
 }

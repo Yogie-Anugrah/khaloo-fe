@@ -1,65 +1,118 @@
-import Input from '@/app/(auth)/text-field';
+'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import { useRouter } from 'next/navigation';
 
-export default function SignUpPage() {
+export default function UserLoginPage() {
+  const router = useRouter();
   return (
-    <main className='flex min-h-screen bg-white text-base font-medium text-black xl:text-lg'>
-      <div className='flex h-auto w-[3/5] flex-1 flex-col justify-center gap-14 px-8 sm:px-12 md:px-14 xl:gap-16 xl:px-20'>
-        {/* Title */}
-        <h1 className='text-5xl font-extrabold max-md:text-center xl:text-7xl'>
-          Login
-        </h1>
-
-        <form className='flex flex-col gap-7'>
-          {/* Username */}
-          <input
-            type='text'
-            placeholder='Username'
-            className='w-full rounded-lg border-[1px] border-[#323232] bg-white px-4 py-3 placeholder:text-[#585857] xl:px-4 xl:py-[18px]'
+    <main className='flex h-screen w-full flex-col items-center justify-center bg-black bg-opacity-70'>
+      <div className='flex w-[80%] max-w-[765px] flex-col gap-8 rounded-2xl bg-white px-6 py-5 sm:px-8 sm:py-6 md:px-10 md:py-8 lg:gap-12 lg:rounded-3xl lg:px-12 lg:py-10 2xl:gap-16 2xl:px-16 2xl:py-12'>
+        {/* Close BUtton */}
+        <button
+          onClick={() => router.back()}
+          className='ml-auto appearance-none'
+        >
+          <Image
+            src='/assets/icons/x.svg'
+            alt='close'
+            width={32}
+            height={32}
+            className='aspect-square w-7 lg:w-8'
           />
+        </button>
 
-          {/* Password */}
-          <Input type='password' placeholder='Password' />
-          <div className='flex justify-between'>
+        {/* Form field */}
+        <form className='flex flex-1 flex-col gap-5 lg:gap-6'>
+          <h1 className='text-2xl font-bold text-primary-2 lg:text-3xl 2xl:text-4xl'>
+            Masuk
+          </h1>
+
+          {/* Email field */}
+          <div className='flex w-full flex-col gap-1.5 text-black'>
+            <label
+              htmlFor='email'
+              className='font-medium lg:text-base xl:text-lg'
+            >
+              Email atau nomor telephone
+            </label>
+            <input
+              type='text'
+              id='email'
+              placeholder='Masukkan email atau nomor telephonemu'
+              className='rounded-xl border border-black bg-transparent p-3 placeholder:text-gray-1 lg:p-4 lg:text-base xl:text-lg'
+            />
+          </div>
+
+          {/* Password field */}
+          <div className='flex w-full flex-col gap-1.5 text-black'>
+            <label
+              htmlFor='password'
+              className='font-medium lg:text-base xl:text-lg'
+            >
+              Password
+            </label>
+            <div className='flex w-full gap-2 rounded-xl border border-black bg-transparent p-3 lg:p-4 lg:text-base xl:text-lg'>
+              <input
+                type='password'
+                id='password'
+                placeholder='Masukkan passwordmu'
+                className='flex-1 truncate outline-none placeholder:text-gray-1'
+              />
+              <button
+                className='flex-shrink-0 font-semibold text-primary-2'
+                type='button'
+              >
+                Show
+              </button>
+            </div>
+          </div>
+          {/* Incorrect Email or Password */}
+          <div className='flex w-full gap-2 rounded-xl bg-[#F8D8D7] p-3 lg:p-4 lg:text-base xl:text-lg'>
+            <p className='flex-1 truncate text-red-500 outline-none'>
+              Incorrect email or password{' '}
+            </p>
+          </div>
+
+          {/* Remember me */}
+          <div className='flex flex-wrap justify-between gap-4 lg:text-base xl:text-lg'>
             {/* Container Checkbox */}
-            <div className='1xl:pl-6 inline-flex items-center gap-2'>
+            <div className='inline-flex items-center gap-2 lg:gap-5'>
               <input
                 type='checkbox'
-                className='aspect-square w-5 border-[1px] border-[#323232]'
+                className='aspect-square w-6 rounded-2xl border-[1px] border-[#323232] accent-primary-2 md:w-8'
               />
-              <label>Remember me</label>
+              <label className='font-medium'>Remember me</label>
             </div>
+
             {/* Forgot Password */}
-            <Link href='/' className='hover:underline hover:underline-offset-4'>
+            <Link
+              href='/'
+              className='font-semibold text-primary-2 hover:underline'
+            >
               Forgot Password
             </Link>
-            {/* Button Submit */}
           </div>
-          <button className='w-full rounded-lg bg-[#B2B2B2] px-4 py-3 font-bold text-white xl:px-4 xl:py-[18px]'>
-            Submit
-          </button>
+          <div className='mt-16 flex flex-col items-center gap-2 lg:mt-20 lg:gap-4'>
+            {/* Submit Button */}
+            <button className=' w-full rounded-xl bg-primary-1 px-4 py-3 font-bold lg:text-base xl:px-4 xl:py-[18px] xl:text-lg'>
+              Login
+            </button>
+            {/* Sign Up */}
+            <p className='text-center font-medium lg:text-base xl:text-lg'>
+              {"Don't"} have an account?{' '}
+              <span className='text-[#888]'>
+                <Link
+                  href='/sign-up'
+                  className='text-primary-2 hover:underline'
+                >
+                  Sign Up
+                </Link>
+              </span>
+            </p>
+          </div>
         </form>
-        <p className='mx-auto h-fit'>
-          {"Don't"} have an account?{' '}
-          <span className='text-[#888]'>
-            <Link
-              href='/sign-up'
-              className='hover:underline hover:underline-offset-4'
-            >
-              Sign Up
-            </Link>
-          </span>
-        </p>
       </div>
-      <Image
-        className='h-auto object-cover object-center grayscale-[85%] max-md:hidden md:w-[40vw]'
-        src='/assets/images/login.jpeg'
-        alt='Login Image'
-        width={790}
-        height={1080}
-      />
     </main>
   );
 }

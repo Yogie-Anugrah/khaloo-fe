@@ -6,3 +6,6 @@ body {
   color: black;
   background: white;
 }
+input:placeholder-shown {
+  text-overflow: ellipsis;
+}
