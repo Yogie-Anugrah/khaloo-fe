@@ -1,8 +1,7 @@
 'use client';
 import clsx from 'clsx';
 import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 enum StepForgotPassEnum {
@@ -68,22 +67,22 @@ const StepForgotPasswordContent: StepContentType[] = [
     ],
   },
 ];
+
 const PINMatcher = 123456;
-export default function UserLoginPage() {
+
+export default function ForgotPasswordPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const searchParams = useSearchParams();
   const [pin, setPin] = useState('');
-  const [step, setStep] = useState(StepForgotPassEnum.EMAIL);
 
-  const isForgotPassword = searchParams.get('forgot-password') === 'true';
+  const [step, setStep] = useState(StepForgotPassEnum.EMAIL);
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setStep(StepForgotPassEnum.SUCCESS);
   };
 
-  return isForgotPassword ? (
+  return (
     <>
       {/* Close BUtton */}
       <div className='flex items-center justify-between'>
@@ -279,115 +278,6 @@ export default function UserLoginPage() {
           </button>
         </div>
       )}
-    </>
-  ) : (
-    <>
-      {/* Close BUtton */}
-      <button onClick={() => router.back()} className='ml-auto appearance-none'>
-        <Image
-          src='/assets/icons/x.svg'
-          alt='close'
-          width={32}
-          height={32}
-          className='aspect-square w-5 lg:w-6'
-        />
-      </button>
-
-      {/* Form field */}
-      <form className='flex flex-1 flex-col justify-between gap-5'>
-        {/* Fill data */}
-        <div className='flex flex-col gap-5'>
-          <h1 className='text-2xl font-bold text-primary-2 lg:text-3xl 2xl:text-4xl'>
-            Masuk
-          </h1>
-          {/* Email field */}
-          <div className='flex w-full flex-col gap-1.5 text-black'>
-            <label
-              htmlFor='email'
-              className='text-sm font-medium sm:text-base xl:text-lg'
-            >
-              Email atau nomor telephone
-            </label>
-            <input
-              type='text'
-              id='email'
-              placeholder='Masukkan email atau nomor telephonemu'
-              className='rounded-xl border border-black bg-transparent p-3 text-sm placeholder:text-gray-1 sm:text-base lg:px-5 lg:py-3 xl:text-lg'
-            />
-          </div>
-
-          {/* Password field */}
-          <div className='flex w-full flex-col gap-1.5 text-black'>
-            <label
-              htmlFor='password'
-              className='text-sm font-medium sm:text-base xl:text-lg'
-            >
-              Password
-            </label>
-            <div className='flex w-full gap-2 rounded-xl border border-black bg-transparent p-3 text-sm sm:text-base lg:px-5 lg:py-3 xl:text-lg'>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                id='password'
-                placeholder='Masukkan passwordmu'
-                className='flex-1 truncate outline-none placeholder:text-gray-1'
-              />
-              <button
-                className='flex-shrink-0 font-bold text-primary-2'
-                type='button'
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? 'Hide' : 'Show'}
-              </button>
-            </div>
-          </div>
-          {/* Incorrect Email or Password */}
-          <div className='flex w-full gap-2 rounded-xl bg-[#F8D8D7] p-3 text-sm sm:text-base lg:px-5 lg:py-3 xl:text-lg'>
-            <p className='flex-1 truncate text-red-500 outline-none'>
-              Incorrect email or password{' '}
-            </p>
-          </div>
-
-          {/* Remember me */}
-          <div className='flex flex-wrap justify-between gap-4 text-sm sm:text-base xl:text-lg'>
-            {/* Container Checkbox */}
-            <div className='inline-flex items-center gap-2 lg:gap-5'>
-              <input
-                type='checkbox'
-                className='aspect-square w-6 rounded-2xl border-[1px] border-[#323232] accent-primary-2 md:w-8'
-              />
-              <label className='font-medium'>Remember me</label>
-            </div>
-
-            {/* Forgot Password */}
-            <button
-              type='button'
-              onClick={() => {
-                router.push('/login?forgot-password=true');
-              }}
-              className='font-semibold text-primary-2 hover:underline'
-            >
-              Forgot Password
-            </button>
-          </div>
-        </div>
-
-        {/* Submit Button */}
-        <div className='flex flex-col items-center gap-3 lg:gap-4'>
-          {/* Submit Button */}
-          <button className=' w-full rounded-xl bg-primary-1 p-3 font-bold lg:px-5 lg:py-4 xl:text-lg'>
-            Login
-          </button>
-          {/* Sign Up */}
-          <p className='text-center text-sm font-medium sm:text-base xl:text-lg'>
-            {"Don't"} have an account?{' '}
-            <span className='text-[#888]'>
-              <Link href='/sign-up' className='text-primary-2 hover:underline'>
-                Sign Up
-              </Link>
-            </span>
-          </p>
-        </div>
-      </form>
     </>
   );
 }
