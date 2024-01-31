@@ -1,7 +1,6 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
-export default function AdminLoginPage() {
+export default function AdminForgotPassPage() {
   return (
     <main className='flex h-screen overflow-hidden bg-white text-base text-black max-md:relative xl:text-lg 2xl:text-xl'>
       <div className='flex w-full items-center justify-center bg-white md:w-1/2 lg:px-8 xl:px-12 2xl:px-20'>
@@ -26,32 +25,30 @@ export default function AdminLoginPage() {
         />
         {/* Title */}
         <h1 className='text-2xl font-normal max-md:text-center lg:text-3xl xl:text-4xl'>
-          Welcome, Admin!
+          Ganti Password
         </h1>
 
         <form className='flex w-full flex-col items-center gap-7 md:max-w-[606px]'>
-          {/* Email */}
-          <input
-            type='text'
-            placeholder='Email atau Nomor Telepon'
-            className='w-full rounded-lg border border-black bg-gray-4 px-5 py-3 text-base text-black placeholder:text-[#585857] md:rounded-xl lg:px-7 lg:py-4 xl:py-[18px] xl:text-lg 2xl:text-xl'
-          />
-
           {/* Password */}
           <input
             type='password'
-            placeholder='Password'
+            placeholder='Password Baru'
             className='w-full rounded-lg border border-black bg-gray-4 px-5 py-3 text-base text-black placeholder:text-[#585857] md:rounded-xl lg:px-7 lg:py-4 xl:py-[18px] xl:text-lg 2xl:text-xl'
           />
-          {/* Forgot Password */}
-          <Link
-            href='/admin/forgot-password'
-            className='hover:underline hover:underline-offset-4'
-          >
-            Lupa Password
-          </Link>
+
+          {/* Password Confirmation */}
+          <input
+            type='password'
+            placeholder='Re-enter Password Baru'
+            className='w-full rounded-lg border border-black bg-gray-4 px-5 py-3 text-base text-black placeholder:text-[#585857] md:rounded-xl lg:px-7 lg:py-4 xl:py-[18px] xl:text-lg 2xl:text-xl'
+          />
+          {/* Warn */}
+          <div className='flex w-full flex-col gap-2 text-left'>
+            <p className='text-red-wrong'>Password Tidak Match</p>
+            <p className='text-green-correct'>Password Match</p>
+          </div>
           <button className='w-full rounded-lg bg-primary-2 px-4 py-3 font-bold text-white xl:px-4 xl:py-[18px]'>
-            Login
+            Submit
           </button>
         </form>
       </div>

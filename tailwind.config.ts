@@ -30,6 +30,8 @@ const config: Config = {
         'primary-6': '#F59EBB',
         'secondary-1': '#F26A2A',
         'accent-1': '#6E9A73',
+        'green-correct': '#6E9A73',
+        'red-wrong': '#FF0000',
       },
     },
   },
