@@ -1,9 +1,16 @@
+'use client';
+import PopupDelete from '@/app/(auth)/admin/login/popup-delete';
+import PopupNonActive from '@/app/(auth)/admin/login/popup-nonactive';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 export default function AdminLoginPage() {
+  const [step, setStep] = useState(1);
+
   return (
     <main className='flex h-screen overflow-hidden bg-white text-base text-black max-md:relative xl:text-lg 2xl:text-xl'>
+      {step == 1 ? <PopupDelete /> : step == 2 && <PopupNonActive />}
       <div className='flex w-full items-center justify-center bg-white md:w-1/2 lg:px-8 xl:px-12 2xl:px-20'>
         {/* Background */}
         <Image
@@ -50,7 +57,17 @@ export default function AdminLoginPage() {
           >
             Lupa Password
           </Link>
-          <button className='w-full rounded-lg bg-primary-2 px-4 py-3 font-bold text-white xl:px-4 xl:py-[18px]'>
+          <button
+            className='w-full rounded-lg bg-primary-2 px-4 py-3 font-bold text-white xl:px-4 xl:py-[18px]'
+            onClick={() => {
+              if (step <= 3) {
+                setStep(step + 1);
+              } else {
+                setStep(1);
+              }
+            }}
+            type='button'
+          >
             Login
           </button>
         </form>

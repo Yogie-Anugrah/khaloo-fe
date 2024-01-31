@@ -1,8 +1,13 @@
+'use client';
+import PopupEmail from '@/app/(auth)/admin/forgot-password/popup-email';
 import Image from 'next/image';
+import { useState } from 'react';
 
 export default function AdminForgotPassPage() {
+  const [open, setOpen] = useState(false);
   return (
     <main className='flex h-screen overflow-hidden bg-white text-base text-black max-md:relative xl:text-lg 2xl:text-xl'>
+      {open && <PopupEmail />}
       <div className='flex w-full items-center justify-center bg-white md:w-1/2 lg:px-8 xl:px-12 2xl:px-20'>
         {/* Background */}
         <Image
@@ -47,7 +52,11 @@ export default function AdminForgotPassPage() {
             <p className='text-red-wrong'>Password Tidak Match</p>
             <p className='text-green-correct'>Password Match</p>
           </div>
-          <button className='w-full rounded-lg bg-primary-2 px-4 py-3 font-bold text-white xl:px-4 xl:py-[18px]'>
+          <button
+            className='w-full rounded-lg bg-primary-2 px-4 py-3 font-bold text-white xl:px-4 xl:py-[18px]'
+            type='button'
+            onClick={() => setOpen(!open)}
+          >
             Submit
           </button>
         </form>
