@@ -2,17 +2,19 @@ import { currencyFormatter } from '@/utils/currency';
 import Image from 'next/image';
 import Link from 'next/link';
 
+export interface CardProductProps {
+  id: string;
+  title: string;
+  price: number;
+  status?: 'new' | 'best-seller' | 'normal' | 'out-stock';
+}
+
 export default function CardProduct({
   status = 'normal',
   title,
   price,
   id,
-}: {
-  status?: 'out-stock' | 'new' | 'best-seller' | 'normal';
-  title: string;
-  price: number;
-  id: string;
-}) {
+}: CardProductProps) {
   return (
     <Link
       href={'/product/' + id}
@@ -65,7 +67,7 @@ export default function CardProduct({
 
       {/* Content */}
       <div className='flex w-full flex-1 flex-col justify-center gap-3 px-5 pb-5 pt-4 text-left lg:px-6 lg:pb-6 lg:pt-4 xl:px-7 xl:pb-7 xl:pt-5'>
-        <p className='break-word font-semibold break-all'>{title}</p>
+        <p className='break-word break-all font-semibold'>{title}</p>
         <p className='font-medium text-[#484747]'>{currencyFormatter(price)}</p>
       </div>
     </Link>
