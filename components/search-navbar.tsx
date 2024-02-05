@@ -169,7 +169,7 @@ export default function SearchNavbar({
         {/* Search Field */}
         <div
           className={clsx(
-            'flex w-full items-center bg-gray-3 px-4 py-2',
+            'flex w-full items-center gap-2 bg-gray-3 px-4 py-2',
             isSearchResultOpen ? 'rounded-b-none rounded-t-lg' : 'rounded-lg'
           )}
           onFocus={() => {

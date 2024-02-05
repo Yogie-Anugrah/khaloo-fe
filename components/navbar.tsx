@@ -24,8 +24,8 @@ const navData = [
     path: '/partner-with-us',
   },
   {
-    name: 'LOCATION',
-    path: '/location',
+    name: 'FIND-US',
+    path: '/find-us',
   },
 ];
 
