@@ -20,8 +20,8 @@ export default function CardStore({
         src={imageUrl}
         width={400}
         height={300}
-        alt={(placeName = ' image')}
-        className='m-auto h-auto w-full rounded-[20px] object-cover object-center max-lg:max-w-[300px] lg:w-[320px] lg:rounded-[40px] xl:w-[400px] '
+        alt={placeName + ' image'}
+        className='m-auto h-auto w-full rounded-[20px] object-cover object-center max-lg:max-w-[300px] lg:w-[320px] lg:rounded-[30px] xl:w-[400px] '
         style={{
           boxShadow: ' 0px 4px 32px rgba(0, 0, 0, 0.3)',
         }}

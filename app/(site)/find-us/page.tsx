@@ -1,25 +1,82 @@
+'use client';
+import SearchClient from '@/app/(site)/find-us/search-client';
 import CardStore, { CardStoreProps } from '@/components/card-store';
-import clsx from 'clsx';
-import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
 
 const FindUsPage = () => {
   const dummyStores: CardStoreProps[] = [
     {
-      placeName: 'Store 1',
-      placeAddress:
-        'Jl. Jend. Sudirman No.123, Tengkerang Tengah, Kec. Marpoyan Damai, Kota Pekanbaru, Riau 28128',
+      placeName: 'SuperMart',
+      placeAddress: '123 Main Street, Cityville, State 12345',
       imageUrl: '/assets/images/kios.png',
-      linkMaps: 'https://maps.google.com/store1',
+      linkMaps: 'https://maps.google.com/supermart',
     },
     {
-      placeName: 'Store 2',
-      placeAddress:
-        'Jl. Jend. Sudirman No.123, Tengkerang Tengah, Kec. Marpoyan Damai, Kota Pekanbaru, Riau 28128',
+      placeName: 'Fashion Emporium',
+      placeAddress: '456 Fashion Avenue, Trendytown, State 56789',
       imageUrl: '/assets/images/kios.png',
-      linkMaps: 'https://maps.google.com/store1',
+      linkMaps: 'https://maps.google.com/fashion_emporium',
+    },
+    {
+      placeName: 'Tech Haven',
+      placeAddress: '789 Gadget Street, Tech City, State 10111',
+      imageUrl: '/assets/images/kios.png',
+      linkMaps: 'https://maps.google.com/tech_haven',
+    },
+    {
+      placeName: 'FreshMart',
+      placeAddress: '987 Healthy Road, Organic Town, State 54321',
+      imageUrl: '/assets/images/kios.png',
+      linkMaps: 'https://maps.google.com/freshmart',
+    },
+    {
+      placeName: 'Book Nook',
+      placeAddress: '654 Literary Lane, Bookworm City, State 98765',
+      imageUrl: '/assets/images/kios.png',
+      linkMaps: 'https://maps.google.com/book_nook',
+    },
+    {
+      placeName: 'Gourmet Delights',
+      placeAddress: '321 Culinary Street, Foodieville, State 13579',
+      imageUrl: '/assets/images/kios.png',
+      linkMaps: 'https://maps.google.com/gourmet_delights',
+    },
+    {
+      placeName: 'Sports Zone',
+      placeAddress: '876 Athlete Avenue, Sports City, State 24680',
+      imageUrl: '/assets/images/kios.png',
+      linkMaps: 'https://maps.google.com/sports_zone',
+    },
+    {
+      placeName: 'Home Decor Hub',
+      placeAddress: '543 Stylish Road, Decor Town, State 64208',
+      imageUrl: '/assets/images/kios.png',
+      linkMaps: 'https://maps.google.com/home_decor_hub',
+    },
+    {
+      placeName: 'Pet Paradise',
+      placeAddress: '210 Pet Street, Animal Haven, State 86420',
+      imageUrl: '/assets/images/kios.png',
+      linkMaps: 'https://maps.google.com/pet_paradise',
+    },
+    {
+      placeName: 'Electronics Expo',
+      placeAddress: '789 Tech Road, Gadget City, State 97531',
+      imageUrl: '/assets/images/kios.png',
+      linkMaps: 'https://maps.google.com/electronics_expo',
     },
     // Add more dummy data as needed
   ];
+
+  const searchParams = useSearchParams();
+
+  const search = searchParams.get('events');
+
+  const filteredStores = dummyStores.filter((store) => {
+    return search
+      ? store.placeName.toLowerCase().includes(search.toLowerCase())
+      : true;
+  });
 
   return (
     <main className='flex w-full flex-col items-center gap-10 px-8 py-8 sm:px-10 md:px-20 lg:gap-20 lg:px-40 lg:py-10 xl:py-14 2xl:px-52 2xl:py-20'>
@@ -29,29 +86,8 @@ const FindUsPage = () => {
       </h1>
 
       <div className='flex w-full flex-col gap-7'>
-        <div
-          className={clsx(
-            'flex w-full items-center gap-2 rounded-xl bg-gray-3 px-4 py-3'
-          )}
-        >
-          {/* Search Icon */}
-          <Image
-            height={32}
-            width={32}
-            src='/assets/icons/search.svg'
-            alt='Search Icon'
-            className='aspect-square w-7 sm:w-8'
-            sizes='(max-width: 640px) 28px, 32px'
-          />
-          {/* Input Field */}
-          <input
-            type='search'
-            placeholder='Search Store or Event...'
-            className={clsx(
-              'w-full bg-transparent text-black outline-none placeholder:text-[#585857] lg:text-lg xl:text-xl 2xl:text-2xl'
-            )}
-          />
-        </div>
+        <SearchClient />
+
         <div className='flex flex-wrap gap-5'>
           <button className='rounded-lg bg-primary-2 px-10 py-2 text-base font-medium text-white lg:text-lg xl:text-xl 2xl:text-2xl'>
             All
@@ -65,7 +101,7 @@ const FindUsPage = () => {
         </div>
       </div>
       <div className='flex w-full flex-col gap-10'>
-        {dummyStores.map((store, index) => (
+        {filteredStores.map((store, index) => (
           <CardStore
             key={index}
             placeName={store.placeName}
