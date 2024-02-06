@@ -1,7 +1,6 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
 const socialMedias = [
   {
@@ -251,7 +250,8 @@ export default function Footer() {
                 alt={image.alt}
                 width={image.width}
                 height={image.height}
-                className='rounded-md bg-white object-contain object-center'
+                className='h-auto w-auto rounded-md bg-white object-contain object-center'
+                sizes={image.width + 'px'}
               />
             );
           })}
