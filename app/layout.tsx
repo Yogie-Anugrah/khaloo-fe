@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+import '../public/antd.min.css'
 import './globals.css';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 

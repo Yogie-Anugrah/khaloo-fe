@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap&subset=latin&variable=--font-poppins');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -45,4 +46,8 @@ input[type='search']::-webkit-search-cancel-button {
   background-color: #434343;
   width: 5px;
   border-radius: 10px;
+}
+
+* {
+  @apply font-poppins;
 }
