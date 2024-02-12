@@ -30,14 +30,16 @@ export default function NavbarWithoutSearchnPath() {
       </Link>
 
       {/* Login Icon */}
-      <Image
-        height={32}
-        width={32}
-        src='/assets/icons/person.svg'
-        alt='Person Icon'
-        className='aspect-square w-7 sm:w-8'
-        sizes='(max-width: 640px) 28px, 32px'
-      />
+      <button >
+        <Image
+          height={40}
+          width={40}
+          src='/assets/icons/person.svg'
+          alt='Person Icon'
+          className='aspect-square w-9 sm:w-10'
+          sizes='(max-width: 640px) 28px, 40px'
+        />
+      </button>
     </nav >
   );
 }
