@@ -174,6 +174,7 @@ export default function Footer() {
               {/* Content link */}
               {footerLink.links.map((link) => (
                 <Link
+                  target={footerLink.title === "Khaloo" ? "_self" : "_blank"}
                   className='font-medium hover:underline'
                   key={link.title}
                   href={link.href}
