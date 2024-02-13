@@ -42,7 +42,7 @@ const privacyPolicyData = [
 export default function PrivacyPolicyPage() {
   return (
     <main className='flex text-black min-h-screen flex-col gap-5 px-8 py-8 md:px-20 lg:py-10 xl:px-32 xl:py-14 2xl:py-20 mb-10'>
-      <h1 className="font-bold text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl text-center">Privacy Policy</h1>
+      <h1 className="font-bold text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl text-center">Privacy Policy</h1>
       <ol className="flex flex-col mt-8 lg:mt-11 gap-8 lg:gap-9 text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">
         {privacyPolicyData.map((data, index) => {
           return (
