@@ -103,9 +103,8 @@ export default function Navbar() {
         data-cy='navbar-expanded'
         className={`fixed right-0 top-0 z-10 flex h-full transform flex-col gap-6 
         border-l-2 border-gray-3 bg-white p-5 text-base transition-all duration-300 ease-in-out max-md:w-[60%]
-        md:static md:h-auto md:w-auto md:flex-1 md:translate-x-0 md:flex-row md:items-center md:justify-between md:gap-12 md:border-none md:bg-transparent md:p-0 lg:text-lg xl:text-xl 2xl:text-2xl ${
-          navBarExpanded ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        md:static md:h-auto md:w-auto md:flex-1 md:translate-x-0 md:flex-row md:items-center md:justify-between md:gap-12 md:border-none md:bg-transparent md:p-0 lg:text-lg xl:text-xl 2xl:text-2xl ${navBarExpanded ? 'translate-x-0' : 'translate-x-full'
+          }`}
       >
         <div className='flex flex-1 flex-col max-lg:gap-5 lg:flex-row '>
           {/* Close Menu Mobile Button */}
@@ -193,14 +192,16 @@ export default function Navbar() {
             isSearchOpen={isSearchOpen}
             isSearchResultOpen={isSearchResultOpen}
           />
-          <Image
-            height={32}
-            width={32}
-            src='/assets/icons/person.svg'
-            alt='Person Icon'
-            className='aspect-square w-7 sm:w-8'
-            sizes='(max-width: 640px) 28px, 32px'
-          />
+          <button>
+            <Image
+              height={40}
+              width={40}
+              src='/assets/icons/person.svg'
+              alt='Person Icon'
+              className='aspect-square w-9 sm:w-10'
+              sizes='(max-width: 640px) 28px, 40px'
+            />
+          </button>
           <button className='flex items-center gap-2'>
             <Image
               height={24}
