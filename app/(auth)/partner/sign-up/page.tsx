@@ -12,44 +12,14 @@ export default function SignUpPartnerPage() {
         </h1>
 
         <form className='flex flex-col gap-7'>
+          {/* Username */}
+          <input
+            type='text'
+            placeholder='Username'
+            className='w-full rounded-lg border-[1px] border-[#323232] bg-white px-4 py-3 placeholder:text-[#585857] xl:px-4 xl:py-[18px]'
+          />
           {/* email */}
-          <Input placeholder='Email / No.Hp' type='text' variant='username' />
-          {/* Partner Category */}
-          <Input type='text' placeholder='Partner Category' />
-          <div className='flex flex-col gap-2 pl-4'>
-            <div className='flex items-center gap-2 lg:gap-4'>
-              <input
-                type='radio'
-                id='businesss'
-                name='category'
-                value='businesss'
-                className='aspect-square w-4 border-[1px] border-[#323232] accent-[#898989] lg:w-7'
-              />
-              <label htmlFor='businesss'>Business Partner</label>
-            </div>
-            <div className='flex items-center gap-2 lg:gap-4'>
-              <input
-                type='radio'
-                id='reseller'
-                name='category'
-                value='reseller'
-                className='aspect-square w-4 border-[1px] border-[#323232] accent-[#898989] lg:w-7'
-              />
-              <label htmlFor='reseller'>Reseller</label>
-            </div>
-            <div className='flex items-center gap-2 lg:gap-4'>
-              <input
-                type='radio'
-                id='businesss'
-                name='category'
-                value='businesss'
-                className='aspect-square w-4 border-[1px] border-[#323232] accent-[#898989] lg:w-7'
-              />
-              <label htmlFor='businesss'>Affiliate</label>
-            </div>
-          </div>
-          <Input type='text' placeholder='XXXXXXXXXX' />
-          <Input type='text' placeholder='XXXXXXXXXX' />
+          <Input placeholder='Email / No.Hp' type='text' />
           {/* Password */}
           <Input type='password' placeholder='Password' />
           {/* Confirm Pass */}
@@ -62,7 +32,7 @@ export default function SignUpPartnerPage() {
           Already have an account?{' '}
           <span className='text-[#888]'>
             <Link
-              href='/partner/login'
+              href='/login'
               className='hover:underline hover:underline-offset-4'
             >
               Login
