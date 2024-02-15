@@ -1,4 +1,5 @@
 import { currencyFormatter } from '@/utils/currency';
+import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -7,6 +8,7 @@ export interface CardProductProps {
   title: string;
   price: number;
   status?: 'new' | 'best-seller' | 'normal' | 'out-stock';
+  className?: string;
 }
 
 export default function CardProduct({
@@ -14,11 +16,13 @@ export default function CardProduct({
   title,
   price,
   id,
+  className,
 }: CardProductProps) {
   return (
     <Link
       href={'/product/' + id}
-      className='flex h-auto w-full flex-col overflow-hidden rounded-3xl bg-white text-base text-black transition-all duration-300 hover:scale-105 max-lg:max-w-[300px] lg:w-[330px] lg:rounded-[32px] lg:text-lg xl:w-[300px] xl:text-xl 2xl:w-[380px] 2xl:text-2xl'
+      className={clsx('flex h-auto w-full flex-col overflow-hidden rounded-3xl bg-white text-base text-black transition-all duration-300 hover:scale-105 max-lg:max-w-[300px] lg:w-[330px] lg:rounded-[32px] lg:text-lg xl:w-[300px] xl:text-xl 2xl:w-[380px] 2xl:text-2xl',
+        className)}
       style={{ boxShadow: '0px 4px 32px rgba(0, 0, 0, 0.3)' }}
     >
       {/* Image and the label */}

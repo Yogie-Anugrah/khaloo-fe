@@ -80,16 +80,16 @@ export default function DetailProductPage() {
           alt='Back Button'
           width={20}
           height={20}
-          className='aspect-square w-3 lg:w-4'
+          className='aspect-square w-5 md:w-6 lg:w-7'
         />
         <p className='text-lg font-medium lg:text-xl xl:text-2xl 2xl:text-3xl'>
           Kembali ke daftar produk
         </p>
       </Link>
       {/* Detail Page Content */}
-      <div className='flex flex-col gap-14 lg:flex-row'>
+      <div className='flex flex-col gap-10 md:gap-12 lg:gap-16 lg:flex-row'>
         {/* Image and Carousel */}
-        <div className='mx-auto flex h-fit w-full max-w-[400px] flex-col lg:w-[30%]'>
+        <div className='mx-auto flex h-fit w-full max-w-[300px] sm:max-w-[400px] flex-col lg:w-[30%]'>
           {/* Product Image */}
           <Image
             src={'/assets/images/product-1.png'}
@@ -141,7 +141,7 @@ export default function DetailProductPage() {
         </div>
         {/* Detail Content */}
         <div className='flex-1'>
-          <div className='flex flex-col gap-7'>
+          <div className='flex flex-col gap-3 sm:gap-4 md:gap-5'>
             {/* Title */}
             <h1 className='text-2xl font-semibold lg:text-3xl xl:text-4xl 2xl:text-[42px]'>
               Serum Avoskin Miraculous Refining 30ml-AHA BHA-Waktunya Eksfoliasi
@@ -200,52 +200,28 @@ export default function DetailProductPage() {
       </div>
 
       {/* Watch Other Product */}
-      <div className='flex flex-col gap-10'>
+      <div className='flex flex-col gap-6 lg:gap-8 xl:gap-10'>
         <h2 className='text-2xl font-semibold lg:text-3xl xl:text-4xl 2xl:text-[42px]'>
           Watch This Product Review!
         </h2>
         <div className='flex gap-10'>
-          <div className='flex flex-col gap-10'>
-            <div className='aspect-[3/2] w-[220px] rounded-[40px] bg-gray-2 lg:w-[447px]' />
-            <h3 className='text-lg font-medium lg:text-xl xl:text-2xl 2xl:text-3xl'>
-              Judul Video Youtube
-            </h3>
-            <p className='text-base font-medium lg:text-lg xl:text-xl 2xl:text-2xl'>
-              1.3 Views-3 Days Ago
-            </p>
-          </div>
-          <div className='flex flex-col gap-10'>
-            <div className='aspect-[3/2] w-[220px] rounded-[40px] bg-gray-2 lg:w-[447px]' />
-            <h3 className='text-lg font-medium lg:text-xl xl:text-2xl 2xl:text-3xl'>
-              Judul Video Youtube
-            </h3>
-            <p className='text-base font-medium lg:text-lg xl:text-xl 2xl:tsext-2xl'>
-              1.3 Views-3 Days Ago
-            </p>
-          </div>
-          <div className='flex flex-col gap-10'>
-            <div className='aspect-[3/2] w-[220px] rounded-[40px] bg-gray-2 lg:w-[447px]' />
-            <h3 className='text-lg font-medium lg:text-xl xl:text-2xl 2xl:text-3xl'>
-              Judul Video Youtube
-            </h3>
-            <p className='text-base font-medium lg:text-lg xl:text-xl 2xl:text-2xl'>
-              1.3 Views-3 Days Ago
-            </p>
-          </div>
-          <div className='flex flex-col gap-10'>
-            <div className='aspect-[3/2] w-[220px] rounded-[40px] bg-gray-2 lg:w-[447px]' />
-            <h3 className='text-lg font-medium lg:text-xl xl:text-2xl 2xl:text-3xl'>
-              Judul Video Youtube
-            </h3>
-            <p className='text-base font-medium lg:text-lg xl:text-xl 2xl:text-2xl'>
-              1.3 Views-3 Days Ago
-            </p>
-          </div>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <div className='flex flex-col gap-2 md:gap-3 xl:gap-4' key={index}>
+              <div className='aspect-[3/2] w-[220px] rounded-3xl lg:rounded-[40px] bg-gray-2 lg:w-[400px] xl:w-[420px] 2xl:w-[450px]' />
+              <h3 className='text-lg font-medium lg:text-xl xl:text-2xl 2xl:text-3xl'>
+                Judul Video Youtube
+              </h3>
+              <p className='text-base font-medium lg:text-lg xl:text-xl 2xl:text-2xl'>
+                1.3 Views-3 Days Ago
+              </p>
+            </div>
+          ))
+          }
         </div>
       </div>
 
-      <div className='flex flex-col gap-10'>
-        <div className='flex justify-between'>
+      <div className='flex flex-col gap-6 lg:gap-8 xl:gap-10'>
+        <div className='flex justify-between flex-wrap gap-2 lg:gap-5'>
           <h2 className='text-2xl font-semibold lg:text-3xl xl:text-4xl 2xl:text-[42px]'>
             Watch This Product Review!
           </h2>
@@ -261,33 +237,23 @@ export default function DetailProductPage() {
               alt='Back Button'
               width={20}
               height={20}
-              className='aspect-square w-10 lg:w-12'
+              className='aspect-square w-7 lg:w-10 2xl:w-12'
             />
           </Link>
         </div>
-        <div className='flex gap-10'>
-          <CardProduct
-            id='3'
-            title='Slow Down Hair Reducer Cream'
-            price={45000}
-          />
-          <CardProduct
-            id='3'
-            title='Slow Down Hair Reducer Cream'
-            price={45000}
-          />
-          <CardProduct
-            id='3'
-            title='Slow Down Hair Reducer Cream'
-            price={45000}
-          />
-          <CardProduct
-            id='3'
-            title='Slow Down Hair Reducer Cream'
-            price={45000}
-          />
+        {/* Card Product */}
+        <div className='flex flex-wrap gap-10 items-center justify-center'>
+          {Array.from({ length: 4 }).map((_, index) => (
+            <CardProduct
+              key={index}
+              id='3'
+              className='m-auto'
+              title='Slow Down Hair Reducer Cream'
+              price={45000}
+            />
+          ))}
         </div>
-      </div>
-    </main>
+      </div >
+    </main >
   );
 }
