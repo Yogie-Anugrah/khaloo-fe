@@ -1,10 +1,18 @@
-'use client';
+"use client";
 import PopupEmail from '@/app/(auth)/admin/forgot-password/popup-email';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
+
+enum PasswordReset {
+  EMAIL = 1,
+  PASSWORD = 2,
+}
 
 export default function AdminForgotPassPage() {
   const [open, setOpen] = useState(false);
+  const [step, setStep] = useState(PasswordReset.EMAIL);
+
   return (
     <main className='flex h-screen overflow-hidden bg-white text-base text-black max-md:relative xl:text-lg 2xl:text-xl'>
       {open && <PopupEmail />}
@@ -30,35 +38,69 @@ export default function AdminForgotPassPage() {
         />
         {/* Title */}
         <h1 className='text-2xl font-normal max-md:text-center lg:text-3xl xl:text-4xl'>
-          Ganti Password
+          {step === PasswordReset.EMAIL ? 'Masukkan Email Untuk Mengganti Password' : 'Ganti Password'}
         </h1>
 
         <form className='flex w-full flex-col items-center gap-7 md:max-w-[606px]'>
-          {/* Password */}
-          <input
-            type='password'
-            placeholder='Password Baru'
-            className='w-full rounded-lg border border-black bg-gray-4 px-5 py-3 text-base text-black placeholder:text-[#585857] md:rounded-xl lg:px-7 lg:py-4 xl:py-[18px] xl:text-lg 2xl:text-xl'
-          />
+          {step === PasswordReset.EMAIL ? (
+            /* Send Email */
+            <>
+              {/* Your Email Input Field */}
+              {/* Email */}
+              <input
+                type='email'
+                placeholder='Email'
+                className='w-full rounded-lg border border-black bg-gray-4 px-5 py-3 text-base text-black placeholder:text-[#585857] md:rounded-xl lg:px-7 lg:py-4 xl:py-[18px] xl:text-lg 2xl:text-xl'
+              />
+              {/* Login */}
+              <Link
+                href='/admin/login'
+                className='hover:underline hover:underline-offset-4'
+              >
+                Udah inget password?
+              </Link>
+            </>
+          ) : (
+            /* Change password */
+            <>
+              {/* Password */}
+              <input
+                type='password'
+                placeholder='Password Baru'
+                className='w-full rounded-lg border border-black bg-gray-4 px-5 py-3 text-base text-black placeholder:text-[#585857] md:rounded-xl lg:px-7 lg:py-4 xl:py-[18px] xl:text-lg 2xl:text-xl'
+              />
 
-          {/* Password Confirmation */}
-          <input
-            type='password'
-            placeholder='Re-enter Password Baru'
-            className='w-full rounded-lg border border-black bg-gray-4 px-5 py-3 text-base text-black placeholder:text-[#585857] md:rounded-xl lg:px-7 lg:py-4 xl:py-[18px] xl:text-lg 2xl:text-xl'
-          />
-          {/* Warn */}
-          <div className='flex w-full flex-col gap-2 text-left'>
-            <p className='text-red-wrong'>Password Tidak Match</p>
-            <p className='text-green-correct'>Password Match</p>
-          </div>
+              {/* Password Confirmation */}
+              <input
+                type='password'
+                placeholder='Re-enter Password Baru'
+                className='w-full rounded-lg border border-black bg-gray-4 px-5 py-3 text-base text-black placeholder:text-[#585857] md:rounded-xl lg:px-7 lg:py-4 xl:py-[18px] xl:text-lg 2xl:text-xl'
+              />
+
+              {/* Warn */}
+              <div className='flex w-full flex-col gap-2 text-left'>
+                <p className='text-red-wrong'>Password Tidak Match</p>
+                <p className='text-green-correct'>Password Match</p>
+              </div>
+            </>
+          )}
+          {/* Submit Button */}
           <button
             className='w-full rounded-lg bg-primary-2 px-4 py-3 font-bold text-white xl:px-4 xl:py-[18px]'
-            type='button'
-            onClick={() => setOpen(!open)}
+            type={step === PasswordReset.PASSWORD ? 'submit' : 'button'}
+            onClick={() => {
+              if (step === PasswordReset.EMAIL) {
+                setTimeout(() => {
+                  setStep((prev) => prev + 1);
+                }, 100);
+              } else {
+                setOpen(!open);
+              }
+            }}
           >
-            Submit
+            {step === PasswordReset.EMAIL ? 'Kirim Reset Password' : 'Ganti Password'}
           </button>
+
         </form>
       </div>
     </main>
