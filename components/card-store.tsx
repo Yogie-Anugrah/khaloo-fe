@@ -6,14 +6,27 @@ export interface CardStoreProps {
   placeAddress: string;
   imageUrl: string;
   linkMaps: string;
+  date?: Date;
+  time?: string;
 }
+
+const options: Intl.DateTimeFormatOptions = {
+  weekday: 'long',
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+};
 
 export default function CardStore({
   placeName,
   placeAddress,
   imageUrl,
   linkMaps,
+  date,
+  time,
 }: CardStoreProps) {
+  const formattedDate = date && new Intl.DateTimeFormat('id-ID', options).format(date);
+
   return (
     <div className='flex w-full items-stretch justify-center gap-4 max-sm:flex-col sm:gap-7 md:gap-10'>
       <Image
@@ -32,13 +45,19 @@ export default function CardStore({
           <p className='text-xl font-semibold lg:text-2xl xl:text-3xl 2xl:text-4xl'>
             {placeName}
           </p>
-          <p className='text-lg lg:text-xl xl:text-2xl 2xl:text-[28px]'>
-            {placeAddress}
-          </p>
+          <div className='text-lg lg:text-xl xl:text-2xl 2xl:text-[28px] flex flex-col gap-1'>
+            <p>{formattedDate}</p>
+            {Boolean(time) &&
+              <p>Pukul {time}</p>
+            }
+            <p>
+              {placeAddress}
+            </p>
+          </div>
         </div>
         <div>
           <Link href={linkMaps}>
-            <button className='rounded-lg bg-secondary-1 px-20 py-2 text-base font-medium text-white lg:text-lg xl:text-xl 2xl:text-2xl'>
+            <button className='hover:brightness-90 duration-300 transition rounded-lg bg-secondary-1 px-20 py-2 text-base font-medium text-white lg:text-lg xl:text-xl 2xl:text-2xl'>
               Maps
             </button>
           </Link>
