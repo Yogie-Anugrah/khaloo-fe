@@ -1,4 +1,5 @@
 import CardProduct, { CardProductProps } from '@/components/card-product';
+import { type Metadata } from 'next';
 
 export default function ProductPage() {
   const dummyProducts: CardProductProps[] = [
@@ -83,3 +84,60 @@ export default function ProductPage() {
     </main>
   );
 }
+
+
+export const metadata: Metadata = {
+  title: 'Product | Khaloo',
+  description:
+    'terms-condition-description',
+  generator: 'Next.js',
+  category: 'E-commerce',
+  applicationName: 'Khaloo Beauty',
+  referrer: 'origin-when-cross-origin',
+  keywords: [
+    'Khaloo Beauty',
+    'Khaloo',
+    'Beauty',
+    'Skincare',
+  ],
+  metadataBase: new URL('https://www.khaloobeauty.com/'),
+  alternates: {
+    canonical: '/terms-condition',
+    languages: {
+      'en-US': '/en-US/terms-condition',
+      'id-ID': '/id-ID/terms-condition',
+    },
+  },
+  openGraph: {
+    title: 'Khaloo Beauty',
+    description:
+      'terms-condition-description',
+    url: 'https://www.khaloobeauty.com/terms-condition',
+    siteName: 'Khaloo Beauty',
+    images: [
+      {
+        url: '/next.svg',
+        width: 1200,
+        height: 630,
+        alt: 'Khaloo Beauty Logo',
+      },
+    ],
+    locale: 'id_ID',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Khaloo Beauty',
+    description:
+      'terms-condition-description',
+    images: [
+      {
+        url: '/next.svg',
+        width: 1200,
+        height: 630,
+        alt: 'Khaloo Beauty Logo',
+      },
+    ],
+  },
+};
+

@@ -6,6 +6,7 @@ import { StyleProvider, px2remTransformer } from '@ant-design/cssinjs';
 import { ConfigProvider, Tabs, type TabsProps } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
+
 const items: TabsProps['items'] = [
   {
     key: 'description',
