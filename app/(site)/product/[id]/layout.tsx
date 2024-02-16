@@ -1,21 +1,21 @@
-import { Metadata, ResolvingMetadata } from 'next'
+import { type Metadata } from 'next'
+import { ReactNode } from 'react'
 
 export async function generateStaticParams() {
-  const productsId = await fetch('https://khaloo-be.vercel.app/products-metadata').then((res) => res.json())
-
-  return productsId.map((prod: { prod_id: string }) => ({
-    id: prod.prod_id,
+  const productIds = await fetch('https://khaloo-be.vercel.app/products-id').then((res) => res.json())
+  return productIds.map((prod: { prod_id: number }) => ({
+    id: prod.prod_id.toString(),
   }))
 }
 
+
 type Props = {
   params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
 }
 
 export async function generateMetadata(
-  { params, searchParams }: Props,
-  parent: ResolvingMetadata
+  { params }: Props,
+  // parent: ResolvingMetadata
 ): Promise<Metadata> {
   // read route params
   const id = params.id
@@ -30,6 +30,6 @@ export async function generateMetadata(
   }
 }
 
-export default function ServerLayout({ children }: { children: React.ReactNode }) {
+export default function ServerLayout({ children }: { children: ReactNode },) {
   return <>{children}</>
 }
