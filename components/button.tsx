@@ -1,7 +1,7 @@
 import { Button as AntdButton, ConfigProvider } from 'antd';
 import { ButtonProps } from 'antd/es/button/button';
 interface CustomButtonProps extends ButtonProps {
-  variant:
+  variant?:
     | 'primary'
     | 'secondary'
     | 'ghost-secondary'
@@ -13,7 +13,7 @@ interface CustomButtonProps extends ButtonProps {
 }
 
 export default function Button({
-  variant,
+  variant = 'primary',
   children,
   fontWeight = 500,
   fontSize = 16,

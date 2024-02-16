@@ -141,7 +141,12 @@ export default function Navbar() {
                   key={item.name}
                   className={clsx(
                     'text-center transition-all duration-300 hover:underline hover:underline-offset-8 ',
-                    pathname == item.path
+                    (
+                      pathname !== '/'
+                        ? pathname === item.path ||
+                          (pathname.includes(item.path) && item.path !== '/')
+                        : item.path === pathname
+                    )
                       ? 'font-bold text-primary-2'
                       : 'font-medium'
                   )}
