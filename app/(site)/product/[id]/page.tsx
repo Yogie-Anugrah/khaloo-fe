@@ -1,77 +1,30 @@
-'use client';
+import TabClient from '@/app/(site)/product/[id]/tabs-client';
 import Button from '@/components/button';
 import CardProduct from '@/components/card-product';
 import { currencyFormatter } from '@/utils/currency';
-import { StyleProvider, px2remTransformer } from '@ant-design/cssinjs';
-import { ConfigProvider, Tabs, type TabsProps } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const items: TabsProps['items'] = [
-  {
-    key: 'description',
-    label: 'Description',
-    children: (
-      <div className='flex flex-col gap-4 break-all font-normal'>
-        <p className='text-base lg:text-lg xl:text-xl 2xl:text-2xl'>
-          Avoskin Miraculous Refining Serum merupakan chemical exfoliator yang
-          mengandung 10% AHA, 3% BHA dilengkapi dengan Niacinamide, Ceramide,
-          dan bahan pendukung lainnya yang membuat serum ini efektif untuk
-          membantu proses eksfoliasi sel kulit mati dan membantu memicu
-          regenerasi sel kulit. Sehingga, kulit akan tampak lebih cerah, tekstur
-          merata, kulit lebih lembut, serta merawat kulit berjerawat dan
-          menyamarkan
-          komedoxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        </p>
-        <p className='text-base lg:text-lg xl:text-xl 2xl:text-2xl'>
-          Avoskin Miraculous Refining Serum merupakan chemical exfoliator yang
-          mengandung 10% AHA, 3% BHA dilengkapi dengan Niacinamide, Ceramide,
-          dan bahan pendukung lainnya yang membuat serum ini efektif untuk
-          membantu proses eksfoliasi sel kulit mati dan membantu memicu
-          regenerasi sel kulit. Sehingga, kulit akan tampak lebih cerah, tekstur
-          merata, kulit lebih lembut, serta merawat kulit berjerawat dan
-          menyamarkan
-          komedoxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        </p>
-        <p className='text-base lg:text-lg xl:text-xl 2xl:text-2xl'>
-          Avoskin Miraculous Refining Serum merupakan chemical exfoliator yang
-          mengandung 10% AHA, 3% BHA dilengkapi dengan Niacinamide, Ceramide,
-          dan bahan pendukung lainnya yang membuat serum ini efektif untuk
-          membantu proses eksfoliasi sel kulit mati dan membantu memicu
-          regenerasi sel kulit. Sehingga, kulit akan tampak lebih cerah, tekstur
-          merata, kulit lebih lembut, serta merawat kulit berjerawat dan
-          menyamarkan
-          komedoxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        </p>
-        <p className='text-base lg:text-lg xl:text-xl 2xl:text-2xl'>
-          Avoskin Miraculous Refining Serum merupakan chemical exfoliator yang
-          mengandung 10% AHA, 3% BHA dilengkapi dengan Niacinamide, Ceramide,
-          dan bahan pendukung lainnya yang membuat serum ini efektif untuk
-          membantu proses eksfoliasi sel kulit mati dan membantu memicu
-          regenerasi sel kulit. Sehingga, kulit akan tampak lebih cerah, tekstur
-          merata, kulit lebih lembut, serta merawat kulit berjerawat dan
-          menyamarkan
-          komedoxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        </p>
-      </div>
-    ),
-  },
-  {
-    key: 'ingredients',
-    label: 'Ingredients',
-    children: 'Content of Tab Pane 2',
-  },
-  {
-    key: 'how-to-use',
-    label: 'How to Use',
-    children: 'Content of Tab Pane 3',
-  },
-];
 
-export default function DetailProductPage() {
-  const px2rem = px2remTransformer({
-    rootValue: 9,
-  });
+async function getDetailProduct({ id }: { id: string }) {
+  try {
+    const res = await fetch(`https://khaloo-be.vercel.app/product/${id}`);
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch detail product data');
+    }
+
+    const data = await res.json();
+
+    return data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
+  }
+}
+
+export default async function DetailProductPage({ params }: { params: { id: string } }) {
+  const productDetail = await getDetailProduct({ id: params.id });
   return (
     <main className='flex min-h-screen flex-col gap-10 overflow-hidden px-8 py-8 text-black md:px-20 lg:gap-14 lg:py-10 xl:px-32 xl:py-14 2xl:py-20'>
       {/* Back Link Navigation */}
@@ -93,7 +46,7 @@ export default function DetailProductPage() {
         <div className='mx-auto flex h-fit w-full max-w-[300px] sm:max-w-[400px] flex-col lg:w-[30%]'>
           {/* Product Image */}
           <Image
-            src={'/assets/images/product-1.png'}
+            src={productDetail.prod_main_img}
             alt='Product Image'
             width={654}
             height={631}
@@ -145,11 +98,11 @@ export default function DetailProductPage() {
           <div className='flex flex-col gap-3 sm:gap-4 md:gap-5'>
             {/* Title */}
             <h1 className='text-2xl font-semibold lg:text-3xl xl:text-4xl 2xl:text-[42px]'>
-              Serum Avoskin Miraculous Refining 30ml-AHA BHA-Waktunya Eksfoliasi
+              {productDetail.prod_name}
             </h1>
             {/* Price */}
             <h2 className='text-xl font-medium lg:text-2xl xl:text-3xl 2xl:text-4xl'>
-              {currencyFormatter(50000)}
+              {currencyFormatter(productDetail.prod_price)}
             </h2>
             {/* Button Shop */}
             <div className='h-20 w-full max-w-80 text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl'>
@@ -163,40 +116,12 @@ export default function DetailProductPage() {
               </Button>
             </div>
           </div>
-          <StyleProvider transformers={[px2rem]}>
-            <ConfigProvider
-              theme={{
-                components: {
-                  Tabs: {
-                    fontWeightStrong: 600,
-                    inkBarColor: '#AF2D6D',
-                    itemActiveColor: '#AF2D6D',
-                    itemHoverColor: '#AF2D6D',
-                    itemSelectedColor: '#AF2D6D',
-                  },
-                },
-              }}
-            >
-              {/* Tab Content */}
+          <TabClient
+            description={productDetail.prod_desc}
+            ingredients={productDetail.prod_ingredients}
+            howToUse={productDetail.prod_how_to_use}
+          />
 
-              <Tabs
-                defaultActiveKey='description'
-                centered
-                items={items}
-                tabBarGutter={64}
-                className='text-3xl'
-                tabBarStyle={{
-                  borderBottom: '10px',
-                  borderColor: '#AF2D6D',
-                  fontWeight: 600,
-                  width: '100%',
-                  justifyContent: 'space-around',
-                  flex: 1,
-                  display: 'flex',
-                }}
-              />
-            </ConfigProvider>
-          </StyleProvider>
         </div>
       </div>
 
@@ -246,6 +171,7 @@ export default function DetailProductPage() {
         <div className='flex flex-wrap gap-10 items-center justify-center'>
           {Array.from({ length: 4 }).map((_, index) => (
             <CardProduct
+              imageUrl={'/assets/images/product-1.png'}
               key={index}
               id='3'
               className='m-auto'

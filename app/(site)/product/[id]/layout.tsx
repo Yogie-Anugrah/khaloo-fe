@@ -23,10 +23,9 @@ export async function generateMetadata(
   // fetch data
   const product = await fetch(`https://khaloo-be.vercel.app/product-metadata/${id}`).then((res) => res.json())
 
-  // optionally access and extend (rather than replace) parent metadata
 
   return {
-    title: product.prod_name,
+    title: product.prod_name + " | Khaloo",
   }
 }
 

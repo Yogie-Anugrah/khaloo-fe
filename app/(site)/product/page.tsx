@@ -1,83 +1,44 @@
-import CardProduct, { CardProductProps } from '@/components/card-product';
+import CardProduct from '@/components/card-product';
 import { type Metadata } from 'next';
 
-export default function ProductPage() {
-  const dummyProducts: CardProductProps[] = [
-    {
-      id: '1',
-      title:
-        'Product 1akl jdlka kjdkla jdklasdljaskdjalsd lkasjd lasdjklas djlkasd jklasd jklas djklasjd askl',
-      price: 29.99,
-      status: 'new',
-    },
-    {
-      id: '2',
-      title: 'Purifying and Brightening Facial Wash 100ml',
-      price: 49.99,
-      status: 'best-seller',
-    },
-    {
-      id: '3',
-      title: 'Product 3',
-      price: 39.99,
-      status: 'normal',
-    },
-    {
-      id: '4',
-      title: 'Product 4',
-      price: 59.99,
-      status: 'out-stock',
-    },
-    {
-      id: '5',
-      title: 'Product 5',
-      price: 19.99,
-      status: 'new',
-    },
-    {
-      id: '6',
-      title:
-        'Product 6ak sd; k;asd;la kdl;as kdl;kasld;kals;dkl;askdlaskdl;askdl;kasdl;kas;dkasdlkasd;kasl;dkas;dlkals;dkas;ldk',
-      price: 79.99,
-      status: 'best-seller',
-    },
-    {
-      id: '7',
-      title:
-        'Purifying and Brightening Facial Wash 100ml Seum kesads jdhjklas jdlakdjalkd jaskldjaslkdjklajsdkladjklajdlkjasdl',
-      price: 69.99,
-      status: 'normal',
-    },
-    {
-      id: '8',
-      title: 'Product 8',
-      price: 89.99,
-      status: 'out-stock',
-    },
-    {
-      id: '9',
-      title: 'Product 9',
-      price: 99.99,
-      status: 'new',
-    },
-    {
-      id: '10',
-      title: 'Product 10',
-      price: 129.99,
-      status: 'best-seller',
-    },
-  ];
+async function getProducts() {
+  try {
+    const res = await fetch('https://khaloo-be.vercel.app/product-list');
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch products');
+    }
+
+    const data = await res.json();
+
+    // Perform array data type return check
+    if (!Array.isArray(data) || data.length === 0) {
+      throw new Error('Invalid data received');
+    }
+
+    return data;
+  } catch (error) {
+    console.error('Error fetching products:', error);
+    throw error;
+  }
+}
+
+export default async function ProductPage() {
+
+  const products = await getProducts();
 
   return (
     <main className='flex min-h-screen flex-col gap-5 px-8 py-8 md:px-20 lg:py-10 xl:px-32 xl:py-14 2xl:py-20'>
       <div className='m-auto grid grid-cols-1 gap-x-6 gap-y-7 sm:grid-cols-2 md:gap-x-10 md:gap-y-14 xl:grid-cols-3 2xl:gap-x-12 2xl:gap-y-20 desktop:grid-cols-4'>
-        {dummyProducts.map((product, index) => (
+        {products.map((product, index) => (
           <CardProduct
-            id={product.id}
-            key={index}
-            title={product.title}
-            price={product.price}
-            status={product.status}
+            imageUrl={product.prod_main_img}
+            id={product.prod_id}
+            key={product.prod_id}
+            title={product.prod_name}
+            price={product.prod_price}
+            exist={product.prod_exist}
+            status={"New"}
           />
         ))}
       </div>
