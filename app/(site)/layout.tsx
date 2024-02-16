@@ -5,7 +5,7 @@ import { type Metadata } from 'next';
 export default function SiteLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactElement;
 }) {
   return (
     <>
