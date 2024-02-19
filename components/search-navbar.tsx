@@ -161,7 +161,7 @@ export default function SearchNavbar({
   return (
     <div
       className={clsx(
-        'absolute left-1/2 top-2.5 z-50 flex w-[calc(100%-30px)] -translate-x-1/2 overflow-hidden transition-all duration-300 md:top-4 md:w-[70%]',
+        'absolute left-1/2 top-2.5 z-0 flex w-[calc(100%-30px)] -translate-x-1/2 overflow-hidden transition-all duration-300 md:top-4 md:w-[65%] lg:w-[60%] 2xl:w-[68%]',
         isSearchOpen ? 'absolute' : ' -translate-y-full'
       )}
     >
