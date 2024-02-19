@@ -33,7 +33,7 @@ const socialMedias = [
       },
       {
         title: 'Terms & Condition',
-        href: '/terms-condition',
+        href: '/terms-conditions',
       },
       {
         title: 'Privacy Policy',
