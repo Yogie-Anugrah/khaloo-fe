@@ -140,8 +140,9 @@ export default function SearchNavbar({
     // Filter the data
     const filteredData = dummyData.filter(
       (data) =>
-        data.name.toLowerCase().includes(searchResult.toLowerCase()) ||
-        data.category.toLowerCase().includes(searchResult.toLowerCase())
+        searchResult ?
+          (data.name.toLowerCase().includes(searchResult.toLowerCase()) ||
+            data.category.toLowerCase().includes(searchResult.toLowerCase())) : ""
     );
 
     // Categorize the filtered data
@@ -161,7 +162,7 @@ export default function SearchNavbar({
   return (
     <div
       className={clsx(
-        'absolute left-1/2 top-2.5 z-0 flex w-[calc(100%-30px)] -translate-x-1/2 overflow-hidden transition-all duration-300 md:top-4 md:w-[65%] lg:w-[60%] 2xl:w-[68%]',
+        'absolute left-1/2 top-2.5 z-0 flex w-[calc(100%-30px)] -translate-x-1/2 overflow-hidden transition-all duration-300 md:top-4 md:w-[60%] 2xl:w-[65%]',
         isSearchOpen ? 'absolute' : ' -translate-y-full'
       )}
     >
@@ -199,14 +200,14 @@ export default function SearchNavbar({
         {/* Content Show */}
         <div
           className={clsx(
-            'h-[500px] w-full space-y-6 overflow-y-scroll rounded-b-lg bg-gray-4 px-6 py-4 md:h-[670px] lg:px-10 lg:py-8 2xl:px-16 2xl:py-10',
+            'max-h-[500px] w-full space-y-6 overflow-y-auto rounded-b-lg bg-gray-4 px-6 py-4 md:max-h-[670px] lg:px-10 lg:py-8 2xl:px-16 2xl:py-10',
             isSearchResultOpen ? 'visible' : 'invisible'
           )}
         >
           {/* Case not found matches */}
-          {Object.entries(categorizeFilteredData).length === 0 ? (
+          {Object.entries(categorizeFilteredData).length === 0 && searchResult ? (
             <p className='text-center text-lg font-semibold text-black lg:text-xl xl:text-2xl 2xl:text-3xl '>
-              Not found
+              Not Result Found
             </p>
           ) : (
             // Case found matches mapping based on category

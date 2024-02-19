@@ -172,15 +172,16 @@ export default function Navbar() {
         <div className='flex flex-shrink-0 items-center justify-center gap-3 font-medium'>
           {/* Search and Person */}
           <div className='flex items-center justify-center gap-2 sm:gap-2 lg:gap-4 2xl:gap-5'>
+            {/* Search Button */}
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 if (isSearchOpen) {
                   setIsSearchOpen(false);
                   setIsSearchResultOpen(false);
                 }
                 else {
                   setIsSearchOpen(true);
-                  setIsSearchResultOpen(true);
 
                 }
               }}
@@ -207,7 +208,7 @@ export default function Navbar() {
                 width={40}
                 src='/assets/icons/person.svg'
                 alt='Person Icon'
-                className='aspect-square w-9 sm:w-10'
+                className='aspect-square w-8 sm:w-10'
                 sizes='(max-width: 640px) 28px, 40px'
               />
             </button>
@@ -234,11 +235,11 @@ export default function Navbar() {
             onClick={() => setNavbarExpanded(true)}
           >
             <Image
-              height={28}
-              width={28}
+              height={24}
+              width={24}
               src='/assets/icons/menu.svg'
               alt='Menu Icon'
-              sizes='28px'
+              sizes='24px'
             />
           </button>
         </div>
