@@ -179,7 +179,7 @@ export default async function DetailProductPage({ params }: { params: { id: stri
             className='flex items-center gap-5 text-primary-2'
           >
             <p className='text-lg font-medium lg:text-xl xl:text-2xl 2xl:text-3xl'>
-              Selengkapnya
+              Others
             </p>
             <Image
               src={'/assets/icons/arrow.svg'}
@@ -191,13 +191,12 @@ export default async function DetailProductPage({ params }: { params: { id: stri
           </Link>
         </div>
         {/* Card Product */}
-        <div className='flex flex-wrap gap-10 items-center justify-center'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 w-full'>
           {products.map((prod) => (
             <CardProduct
               imageUrl={prod.prod_main_img}
               key={prod.prod_id}
               id={prod.prod_id}
-              className='m-auto'
               exist={prod.prod_exist}
               status={prod.prod_flag}
               title={prod.prod_name}
