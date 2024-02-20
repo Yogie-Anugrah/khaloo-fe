@@ -1,4 +1,4 @@
-import { currencyFormatter } from '@/utils/currency';
+import { currencyFormatter } from '@/utils/utils';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,14 +8,14 @@ export interface CardProductProps {
   id: string;
   title: string;
   price: number;
-  status?: 'New' | 'BestSeller' | 'normal';
+  status?: 'New' | 'BestSeller' | null;
   imageUrl: string;
   className?: string;
   exist?: boolean;
 }
 
 export default function CardProduct({
-  status = 'normal',
+  status = null,
   title,
   price,
   id,
@@ -65,7 +65,7 @@ export default function CardProduct({
             )}
             {/* Image */}
             <Image
-              src={"https://unsplash.com/photos/a-woman-sitting-on-a-stool-posing-for-a-picture-4OpJoosWwMs"}
+              src={imageUrl}
               alt={title + ' image'}
               width={346}
               height={346}

@@ -1,4 +1,4 @@
-import { currencyFormatter } from '@/utils/currency';
+import { currencyFormatter } from '@/utils/utils';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useMemo, type Dispatch, type SetStateAction } from 'react';
