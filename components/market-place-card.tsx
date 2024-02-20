@@ -1,4 +1,4 @@
-import { currencyFormatter } from '@/utils/utils';
+import { currencyFormatter, ratingFormatter, saleCountFormatter } from '@/utils/utils';
 import clsx from 'clsx';
 import Image from "next/image";
 import Link from 'next/link';
@@ -56,7 +56,7 @@ export default function MarketPlaceCard({
         style={{ boxShadow: '0px 4px 32px rgba(0, 0, 0, 0.3)' }}
       >
         {/* Image and the label */}
-        <div className='flex flex-col gap-6 w-full px-5 py-6 lg:py-8 xl:px-7 xl:py-9 items-center justify-center text-center flex-1'>
+        <div className='flex flex-col gap-4 lg:gap-6 w-full px-5 py-6 lg:py-8 xl:px-7 xl:py-9 items-center justify-center text-center flex-1'>
           {/* Highlighted Promo */}
           {highlightPromo && (
             <p
@@ -76,18 +76,21 @@ export default function MarketPlaceCard({
             alt={content[type].title}
             width={229}
             height={60}
-            className='w-full h-[60px] object-contain object-center'
+            className='w-full h-[50px] lg:h-[60px] object-contain object-center'
             sizes='100vw'
           />
           {/* Content */}
-          <div className='flex w-full flex-col gap-2'>
+          <div className='flex w-full flex-col gap-1 lg:gap-2'>
             {Boolean(discountPrice) &&
               <p className=' text-black text-lg lg:rounded-[32px] lg:text-xl xl:text-2xl 2xl:text-3xl'>{currencyFormatter(discountPrice)}</p>
             }
             <p className={clsx(" text-black lg:rounded-[32px]", Boolean(discountPrice) ? "text-base lg:text-lg xl:text-xl line-through text-red-500" : "lg:text-xl xl:text-2xl 2xl:text-3xl text-lg")}>{currencyFormatter(price)}</p>
-            <div className='flex gap-2 items-center justify-center text-base lg:text-lg xl:text-xl'>
-              <Image src={"/assets/icons/star.svg"} alt='Star Icon' width={25} height={25} />
-              <p>{rating}</p> | <p>{saleCount}</p>
+            <div className='flex flex-col sm:flex-row gap-2 items-center justify-center text-base lg:text-lg xl:text-xl'>
+              <div className='flex items-center gap-1'>
+                <Image src={"/assets/icons/star.svg"} alt='Star Icon' width={25} height={25} />
+                <p>{ratingFormatter(rating)}</p>
+              </div>
+              <p><span className='max-sm:hidden'> | </span>{saleCountFormatter(saleCount)}</p>
             </div>
           </div>
           <p className='text-gray-2 text-[10px] lg:text-xs'>{promoDueDateText}</p>

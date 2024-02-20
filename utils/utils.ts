@@ -66,3 +66,55 @@ export const dateTimeFormatter = (date?: Date): string => {
       return `${years} years ago`;
   }
 };
+
+export const saleCountFormatter = (val?: number) => {
+  if (!val) return '';
+
+  // Check if the value is greater than or equal to 1 million
+  if (val >= 1000000) {
+    const formattedValue = new Intl.NumberFormat('id-ID', {
+      style: 'decimal',
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }).format(val / 1000000);
+
+    const trimmedValue = formattedValue.replace(/\.0$/, '');
+
+    // Append 'M+' to indicate millions or more
+    return `${trimmedValue}M+ sold`;
+  } else if (val >= 1000) {
+    // Check if the value is greater than or equal to 1000
+    const formattedValue = new Intl.NumberFormat('id-ID', {
+      style: 'decimal',
+      minimumFractionDigits: 1,
+      maximumFractionDigits: 1,
+    }).format(val / 1000);
+
+    const trimmedValue = formattedValue.replace(/\.0$/, '');
+
+    // Append 'k+' to indicate thousands or more
+    return `${trimmedValue}k+ sold`;
+  } else {
+    // For values less than 1000, use the regular decimal formatter
+    const formattedValue = new Intl.NumberFormat('id-ID', {
+      style: 'decimal',
+      maximumFractionDigits: 0,
+    }).format(val);
+
+    return formattedValue + ' sold';
+  }
+};
+
+export const ratingFormatter = (val?: number) => {
+  if (!val) return '';
+
+  // Format the value with a comma as a separator
+  const formattedValue = new Intl.NumberFormat('id-ID', {
+    style: 'decimal',
+    useGrouping: true, // Use grouping separator (comma)
+    minimumFractionDigits: 1,
+    maximumFractionDigits: 1,
+  }).format(val);
+
+  return formattedValue;
+};
