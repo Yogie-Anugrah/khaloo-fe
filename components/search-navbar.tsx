@@ -186,7 +186,7 @@ export default function SearchNavbar({
               width={32}
               src='/assets/icons/search.svg'
               alt='Search Icon'
-              className='aspect-square w-7 sm:w-8'
+              className='aspect-square w-7 lg:w-8'
               sizes='(max-width: 640px) 28px, 32px'
             />
             {/* Input Field */}

@@ -179,6 +179,7 @@ export default function Navbar() {
                 if (isSearchOpen) {
                   setIsSearchOpen(false);
                   setIsSearchResultOpen(false);
+                  setSearchResult('');
                 }
                 else {
                   setIsSearchOpen(true);
