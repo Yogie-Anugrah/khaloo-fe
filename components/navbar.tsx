@@ -133,7 +133,7 @@ export default function Navbar() {
             <ul
               className={clsx(
                 'flex flex-1 flex-col items-center gap-5 font-medium md:flex-row md:justify-center md:gap-5 lg:gap-9 xl:gap-12 2xl:gap-20',
-                isSearchOpen ? 'hidden' : 'flex'
+                isSearchOpen ? 'hidden' : 'flex',
               )}
             >
               {navData.map((item) => {
@@ -172,15 +172,17 @@ export default function Navbar() {
         <div className='flex flex-shrink-0 items-center justify-center gap-3 font-medium'>
           {/* Search and Person */}
           <div className='flex items-center justify-center gap-2 sm:gap-2 lg:gap-4 2xl:gap-5'>
+            {/* Search Button */}
             <button
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
                 if (isSearchOpen) {
                   setIsSearchOpen(false);
                   setIsSearchResultOpen(false);
+                  setSearchResult('');
                 }
                 else {
                   setIsSearchOpen(true);
-                  setIsSearchResultOpen(true);
 
                 }
               }}
@@ -190,7 +192,7 @@ export default function Navbar() {
                 width={32}
                 src={!isSearchOpen ? '/assets/icons/search.svg' : "/assets/icons/x.svg"}
                 alt='Search Icon'
-                className={clsx("aspect-square transition-all duration-300", !isSearchOpen ? "w-7 sm:w-8" : "w-5 sm:w-6 rotate-90")}
+                className={clsx("aspect-square transition-all duration-300", !isSearchOpen ? "w-7 sm:w-8" : "w-5 sm:w-6 rotate-90 max-md:hidden")}
                 sizes='(max-width: 640px) 28px, 32px'
               />
             </button>
@@ -198,20 +200,24 @@ export default function Navbar() {
               searchResult={searchResult}
               setIsSearchResultOpen={setIsSearchResultOpen}
               setSearchResult={setSearchResult}
+              setIsSearchOpen={setIsSearchOpen}
               isSearchOpen={isSearchOpen}
               isSearchResultOpen={isSearchResultOpen}
             />
-            <button>
+            <button
+              className={clsx(isSearchOpen && "max-md:hidden")}>
               <Image
                 height={40}
                 width={40}
                 src='/assets/icons/person.svg'
                 alt='Person Icon'
-                className='aspect-square w-9 sm:w-10'
+                className='aspect-square w-8 sm:w-10'
                 sizes='(max-width: 640px) 28px, 40px'
               />
             </button>
-            <button className='flex items-center gap-2'>
+            <button
+              className={clsx(isSearchOpen && "max-md:hidden", 'flex items-center gap-2')}
+            >
               <Image
                 height={24}
                 width={24}
@@ -230,15 +236,15 @@ export default function Navbar() {
           <button
             data-cy='navbar-toggle'
             aria-label='Menu'
-            className='md:hidden'
+            className={clsx("md:hidden", isSearchOpen && "max-md:hidden")}
             onClick={() => setNavbarExpanded(true)}
           >
             <Image
-              height={28}
-              width={28}
+              height={24}
+              width={24}
               src='/assets/icons/menu.svg'
               alt='Menu Icon'
-              sizes='28px'
+              sizes='24px'
             />
           </button>
         </div>
