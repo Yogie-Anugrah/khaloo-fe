@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 async function getDetailProduct({ id }: { id: string }) {
   try {
-    const res = await fetch(`https://khaloo-be.vercel.app/product/${id}`, { cache: "no-cache" });
+    const res = await fetch(`https://khaloo-be.vercel.app/products/${id}`, { cache: "no-cache" });
 
     if (!res.ok) {
       throw new Error('Failed to fetch detail product data');
@@ -25,7 +25,7 @@ async function getDetailProduct({ id }: { id: string }) {
 
 async function getProducts() {
   try {
-    const res = await fetch('https://khaloo-be.vercel.app/product-list', { cache: "no-cache" });
+    const res = await fetch('https://khaloo-be.vercel.app/products/list', { cache: "no-cache" });
 
     if (!res.ok) {
       throw new Error('Failed to fetch products');
@@ -146,17 +146,22 @@ export default async function DetailProductPage({ params }: { params: { id: stri
             Watch This Product Review!
           </h2>
           <div className='flex gap-10'>
-            {productDetail.prod_review.map((vid: any, index: number) => (
-              <Link href={vid.vid_url} className='flex flex-col gap-2 md:gap-3 xl:gap-4' key={index} target='_blank'>
-                <div className='aspect-[3/2] w-[220px] rounded-3xl lg:rounded-[40px] bg-gray-2 lg:w-[400px] xl:w-[420px] 2xl:w-[450px] hover:scale-105 transition-all duration-300' />
-                <h3 className='text-lg font-medium lg:text-xl xl:text-2xl 2xl:text-3xl'>
-                  {vid.vid_title}
-                </h3>
-                <p className='text-base font-medium lg:text-lg xl:text-xl 2xl:text-2xl'>
-                  {viewFormatter(vid.vid_views)} - {dateTimeFormatter(new Date(vid.vid_createdAt))}
-                </p>
-              </Link>
-            ))
+            {productDetail.prod_review.map((vid: any, index: number) => {
+              const ytId = vid.vid_url.split('v=')[1];
+              return (
+                <Link href={vid.vid_url} className='flex flex-col gap-2 md:gap-3 xl:gap-4' key={index} target='_blank'>
+                  <div className='overflow-hidden w-fit h-fit rounded-3xl lg:rounded-[40px]'>
+                    <Image src={`https://img.youtube.com/vi/${ytId}/0.jpg`} alt={vid.vid_title} width={450} height={300} className='aspect-[3/2] w-[220px] lg:w-[400px] xl:w-[420px] 2xl:w-[450px] hover:scale-105 transition-all duration-300 object-cover' />
+                  </div>
+                  <h3 className='text-lg font-medium lg:text-xl xl:text-2xl 2xl:text-3xl'>
+                    {vid.vid_title}
+                  </h3>
+                  <p className='text-base font-medium lg:text-lg xl:text-xl 2xl:text-2xl'>
+                    {viewFormatter(vid.vid_views)} - {dateTimeFormatter(new Date(vid.vid_createdAt))}
+                  </p>
+                </Link>
+              )
+            })
             }
           </div>
         </div>
