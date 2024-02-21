@@ -3,7 +3,7 @@ import { Event, Location } from '@/components/card-store';
 
 async function getStores(): Promise<Location[]> {
   try {
-    const res = await fetch('https://khaloo-be-nine.vercel.app/locations');
+    const res = await fetch('https://khaloo-be-nine.vercel.app/locations', { cache: "no-cache" });
 
     if (!res.ok) {
       throw new Error('Failed to fetch data stores');
@@ -24,7 +24,7 @@ async function getStores(): Promise<Location[]> {
 
 async function getEvents(): Promise<Event[]> {
   try {
-    const res = await fetch('https://khaloo-be-nine.vercel.app/events');
+    const res = await fetch('https://khaloo-be-nine.vercel.app/events', { cache: "no-cache" });
 
     if (!res.ok) {
       throw new Error('Failed to fetch data events');
