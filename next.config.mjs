@@ -4,7 +4,13 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'unsplash.com',
+        hostname: 'a0.muscache.com',
+        port: '',
+        pathname: '/**/*',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.youtube.com',
         port: '',
         pathname: '/**/*',
       },

@@ -142,10 +142,13 @@ export default function Navbar() {
                     key={item.name}
                     className={clsx(
                       'text-center transition-all duration-300 hover:underline hover:underline-offset-8 ',
-                      pathname == item.path
+                      (item.path === '/' ? pathname === "/" :
+                        pathname.includes(item.path))
                         ? 'font-bold text-primary-2'
                         : 'font-medium'
-                    )}
+                    )
+
+                    }
                   >
                     <Link
                       data-cy={`navbar-link-${item.name
@@ -248,19 +251,20 @@ export default function Navbar() {
             />
           </button>
         </div>
-      </nav>
+      </nav >
       {/* Side bar opaque background */}
-      <div
+      < div
         ref={sideBarBgRef}
-        data-cy='navbar-side-bar-bg'
-        className={clsx(
-          'fixed inset-0 z-[59] md:z-50 h-full w-full bg-opacity-80 backdrop-blur-sm',
-          isSearchResultOpen
-            ? 'visible bg-black'
-            : navBarExpanded
-              ? 'visible md:hidden'
-              : 'hidden'
-        )}
+        className={
+          clsx(
+            'fixed inset-0 z-[59] md:z-50 h-full w-full bg-opacity-80 backdrop-blur-sm',
+            isSearchResultOpen
+              ? 'visible bg-black'
+              : navBarExpanded
+                ? 'visible md:hidden'
+                : 'hidden'
+          )
+        }
       />
     </>
   );

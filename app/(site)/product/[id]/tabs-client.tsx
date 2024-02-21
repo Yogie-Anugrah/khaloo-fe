@@ -15,12 +15,11 @@ export default function TabClient({ description, ingredients, howToUse }: { desc
       return null; // Return null or any other default content if the value is undefined
     }
 
-    const paragraphs = str.split('\n').map((paragraph, index) => (
+    const paragraphs = str.trim().split('\n').map((paragraph, index) => (
       <p key={index}>{paragraph}</p>
     ));
     return paragraphs;
   };
-
 
 
   const items: TabsProps['items'] = [
