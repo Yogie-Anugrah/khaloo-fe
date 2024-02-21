@@ -1,4 +1,5 @@
 "use client";
+// import Typography from '@/components/Typography';
 import Typography from '@/components/Typography';
 import { Col, Row, Carousel, Card as AntdCard, Image } from 'antd';
 import CustomCarousel from '@/components/Carousel';
