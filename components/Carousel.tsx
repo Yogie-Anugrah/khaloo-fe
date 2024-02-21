@@ -28,11 +28,9 @@ export default function Carousel({ children, enableArrow }: CarouselProps) {
     <Row gutter={8} align={'middle'}>
       {enableArrow && (
         <Col span={1}>
-          <Col span={1}>
-            <div style={{ width: '24px', height: '24px', borderRadius: '50%', backgroundColor: '#F26A2A', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-              <LeftOutlined style={{color: 'white'}} onClick={previous} />
-            </div>
-          </Col>
+          <div style={{ width: '24px', height: '24px', borderRadius: '50%', backgroundColor: '#F26A2A', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <LeftOutlined style={{color: 'white'}} onClick={previous} />
+          </div>
         </Col>
       )}
       <Col span={enableArrow ? 22 : 24}>
