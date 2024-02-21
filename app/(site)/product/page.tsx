@@ -3,12 +3,11 @@ import { type Metadata } from 'next';
 
 async function getProducts() {
   try {
-    const res = await fetch('https://khaloo-be.vercel.app/products/list', { cache: "no-cache" });
+    const res = await fetch('https://khaloo-be-nine.vercel.app/products/list', { cache: "no-cache" });
 
     if (!res.ok) {
       throw new Error('Failed to fetch products');
     }
-
     const data = await res.json();
 
     // Perform array data type return check
