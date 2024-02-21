@@ -3,7 +3,7 @@ import { type Metadata } from 'next';
 
 async function getProducts() {
   try {
-    const res = await fetch('https://khaloo-be.vercel.app/product-list');
+    const res = await fetch('https://khaloo-be.vercel.app/products/list', { cache: "no-cache" });
 
     if (!res.ok) {
       throw new Error('Failed to fetch products');
@@ -26,11 +26,10 @@ async function getProducts() {
 export default async function ProductPage() {
 
   const products = await getProducts();
-
   return (
     <main className='flex min-h-screen flex-col gap-5 px-8 py-8 md:px-20 lg:py-10 xl:px-32 xl:py-14 2xl:py-20'>
-      <div className='m-auto grid grid-cols-1 gap-x-6 gap-y-7 sm:grid-cols-2 md:gap-x-10 md:gap-y-14 xl:grid-cols-3 2xl:gap-x-12 2xl:gap-y-20 desktop:grid-cols-4'>
-        {products.map((product, index) => (
+      <div className='m-auto grid grid-cols-1 gap-x-6 gap-y-7 sm:grid-cols-2 md:gap-x-10 md:gap-y-14 xl:grid-cols-3 2xl:gap-x-12 2xl:gap-y-20 desktop:grid-cols-4 w-full'>
+        {products.map((product) => (
           <CardProduct
             imageUrl={product.prod_main_img}
             id={product.prod_id}
@@ -38,7 +37,7 @@ export default async function ProductPage() {
             title={product.prod_name}
             price={product.prod_price}
             exist={product.prod_exist}
-            status={"New"}
+            status={product.prod_flag}
           />
         ))}
       </div>
