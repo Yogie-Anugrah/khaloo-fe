@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 async function getDetailProduct({ id }: { id: string }) {
   try {
-    const res = await fetch(`https://khaloo-be.vercel.app/product/${id}`, { cache: "no-cache" });
+    const res = await fetch(`https://khaloo-be.vercel.app/products/${id}`, { cache: "no-cache" });
 
     if (!res.ok) {
       throw new Error('Failed to fetch detail product data');
@@ -25,7 +25,7 @@ async function getDetailProduct({ id }: { id: string }) {
 
 async function getProducts() {
   try {
-    const res = await fetch('https://khaloo-be.vercel.app/product-list', { cache: "no-cache" });
+    const res = await fetch('https://khaloo-be.vercel.app/products/list', { cache: "no-cache" });
 
     if (!res.ok) {
       throw new Error('Failed to fetch products');

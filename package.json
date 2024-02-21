@@ -12,6 +12,7 @@
     "format:fix": "prettier --write"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.3.0",
     "@ant-design/nextjs-registry": "^1.0.0",
     "antd": "^5.14.0",
     "clsx": "^2.1.0",
