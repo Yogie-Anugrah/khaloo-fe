@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 export type Location = {
-  type: string;
+  type: "location"
   name: string;
   address: string;
   imageUrl: string;
@@ -21,7 +21,7 @@ export type SearchResult = {
 
 
 export type Event = {
-  type: string;
+  type: "event"
   name: string;
   startDate: Date;
   endDate: Date;

@@ -96,12 +96,12 @@ export default function SearchClient({ data }: { data: SearchResult }) {
               title={item.name}
               address={item.address}
               imageUrl={item.imageUrl}
-              linkMaps={filter === "locations" && 'mapsUrl' in item ? item.mapsUrl : undefined}
-              startDate={filter === "events" && 'startDate' in item ? item.startDate : undefined}
-              endDate={filter === "events" && 'startDate' in item ? item.endDate : undefined}
-              time={filter === "events" && 'time' in item ? item.time : undefined}
-              bannerUrl={filter === "events" && 'bannerUrl' in item ? item.bannerUrl : undefined}
-              type={filter === "locations" ? "store" : "event"}
+              linkMaps={item.type === "location" && 'mapsUrl' in item ? item.mapsUrl : undefined}
+              startDate={item.type === "event" && 'startDate' in item ? item.startDate : undefined}
+              endDate={item.type === "event" && 'startDate' in item ? item.endDate : undefined}
+              time={item.type === "event" && 'time' in item ? item.time : undefined}
+              bannerUrl={item.type === "event" && 'bannerUrl' in item ? item.bannerUrl : undefined}
+              type={item.type === "location" ? "store" : "event"}
             />
           ))
         ) : (
