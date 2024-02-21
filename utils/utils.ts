@@ -118,3 +118,40 @@ export const ratingFormatter = (val?: number) => {
 
   return formattedValue;
 };
+
+interface CardStoreProps {
+  title: string;
+  address: string;
+  imageUrl: string;
+  linkMaps: string | null;
+  startDate: Date | null;
+  endDate: Date | null;
+  time: string | null;
+  type: string;
+  bannerUrl: string;
+}
+
+// Function to format interval date
+export const formatIntervalDate = (start?: Date, end?: Date): string => {
+  if (!start) return '';
+  if (!end) return '';
+
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  };
+
+  // If there is no end date or the end date is the same as the start date, display only one date
+  if (!end || end.getTime() === start.getTime()) {
+    return new Intl.DateTimeFormat('id-ID', options).format(start);
+  } else {
+    // If there is an end date different from the start date, display the interval
+    const formattedStart = new Intl.DateTimeFormat('id-ID', options).format(
+      start
+    );
+    const formattedEnd = new Intl.DateTimeFormat('id-ID', options).format(end);
+    return `${formattedStart} - ${formattedEnd}`;
+  }
+};
