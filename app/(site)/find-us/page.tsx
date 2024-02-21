@@ -21,7 +21,7 @@ async function getStores(): Promise<Location[]> {
     throw error;
   }
 }
-// 
+
 async function getEvents(): Promise<Event[]> {
   try {
     const res = await fetch('https://khaloo-be-nine.vercel.app/events');
