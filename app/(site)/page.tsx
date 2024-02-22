@@ -1,97 +1,76 @@
 "use client";
-// import Typography from '@/components/Typography';
 import Typography from '@/components/Typography';
-import { Col, Row, Carousel, Card as AntdCard, Image } from 'antd';
+import { Col, Row, Card as AntdCard, Image } from 'antd';
 import CustomCarousel from '@/components/Carousel';
 import CustomCard from '@/components/Card';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
-import { useState } from 'react';
 import ImageLink from '@/components/ImageLink';
+import React from 'react';
+import { API_URL } from '../../libs/constant';
+import Link from 'antd/es/typography/Link';
+import MarketPlaceCard, { MarketPlaceCardProps } from "@/components/market-place-card";
+import { Modal } from "antd";
 
-export default function Home() {
-  const contentStyle: React.CSSProperties = {
-    margin: 0,
-    height: '160px',
-    color: '#fff',
-    lineHeight: '160px',
-    textAlign: 'center',
-    background: '#364d79',
-  };
 
-  const [currentState, setCurrentState] = useState(0);
-  const onChange = (currentSlide: number) => {
-    setCurrentState(currentSlide)
-    console.log(currentSlide)
+const getData = async () => {
+  const response = await fetch(`${API_URL}/home/banners`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
   }
+  const data = await response.json();
+  return data;
+}
 
-  const imageLinks = [
-    {
-      imgSrc: 'https://static5.depositphotos.com/1020804/422/i/950/depositphotos_4225403-stock-photo-jar-with-cosmetic-cream.jpg',
+const getHighlightData = async () => {
+  const response = await fetch(`${API_URL}/products/highlight`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  const data = await response.json();
+  return data;
+}
+
+const getArticleData = async () => {
+  const response = await fetch(`${API_URL}/articles/top`);
+  if (!response.ok) {
+    throw new Error('Network response was not ok');
+  }
+  const data = await response.json();
+  return data;
+}
+
+export default async function Home() {
+  const bannerData = await getData();
+  const highlightData = await getHighlightData();
+  const articleData = await getArticleData();
+
+
+  const imageLinks: Array<{
+    imgSrc: string;
+    product: {
+      id: string;
+      title: string;
+      subTitle: string;
+      action1Label: string;
+      action2Label: string;
+      action1OnClick: React.ReactNode;
+      action2OnClick: React.ReactNode;
+    };
+  }> = [];
+
+  highlightData.forEach((highlight: any) => {
+    imageLinks.push({
+      imgSrc: highlight.prod_main_img,
       product: {
-        title: 'Product 1',
-        subTitle: 'This is a product',
+        id: highlight.prod_id,
+        title: highlight.prod_name,
+        subTitle: `Rp. ${highlight.prod_price.toLocaleString('id-ID')}`,
         action1Label: 'Shop Now',
         action2Label: 'Shop Detail',
-        action1OnClick: () => console.log('Shop Now'),
-        action2OnClick: () => console.log('Shop Detail')
+        action1OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'white' }}>Shop Now</Link>,
+        action2OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'black' }}>Shop Detail</Link>,
       }
-    },
-    {
-      imgSrc: 'https://static5.depositphotos.com/1020804/422/i/950/depositphotos_4225403-stock-photo-jar-with-cosmetic-cream.jpg',
-      product: {
-        title: 'Product 1',
-        subTitle: 'This is a product',
-        action1Label: 'Shop Now',
-        action2Label: 'Shop Detail',
-        action1OnClick: () => console.log('Shop Now'),
-        action2OnClick: () => console.log('Shop Detail')
-      }
-    },
-    {
-      imgSrc: 'https://static5.depositphotos.com/1020804/422/i/950/depositphotos_4225403-stock-photo-jar-with-cosmetic-cream.jpg',
-      product: {
-        title: 'Product 1',
-        subTitle: 'This is a product',
-        action1Label: 'Shop Now',
-        action2Label: 'Shop Detail',
-        action1OnClick: () => console.log('Shop Now'),
-        action2OnClick: () => console.log('Shop Detail')
-      }
-    },
-    {
-      imgSrc: 'https://static5.depositphotos.com/1020804/422/i/950/depositphotos_4225403-stock-photo-jar-with-cosmetic-cream.jpg',
-      product: {
-        title: 'Product 1',
-        subTitle: 'This is a product',
-        action1Label: 'Shop Now',
-        action2Label: 'Shop Detail',
-        action1OnClick: () => console.log('Shop Now'),
-        action2OnClick: () => console.log('Shop Detail')
-      }
-    },
-    {
-      imgSrc: 'https://static5.depositphotos.com/1020804/422/i/950/depositphotos_4225403-stock-photo-jar-with-cosmetic-cream.jpg',
-      product: {
-        title: 'Product 1',
-        subTitle: 'This is a product',
-        action1Label: 'Shop Now',
-        action2Label: 'Shop Detail',
-        action1OnClick: () => console.log('Shop Now'),
-        action2OnClick: () => console.log('Shop Detail')
-      }
-    },
-    {
-      imgSrc: 'https://static5.depositphotos.com/1020804/422/i/950/depositphotos_4225403-stock-photo-jar-with-cosmetic-cream.jpg',
-      product: {
-        title: 'Product 1',
-        subTitle: 'This is a product',
-        action1Label: 'Shop Now',
-        action2Label: 'Shop Detail',
-        action1OnClick: () => console.log('Shop Now'),
-        action2OnClick: () => console.log('Shop Detail')
-      }
-    },
-  ];
+    });
+  });
 
   const renderImageLinks = () => {
     const rows: JSX.Element[] = [];
@@ -100,11 +79,13 @@ export default function Home() {
 
     for (let i = 0; i < Math.ceil(maxItems / maxItemsPerRow); i++) {
       const rowItems: JSX.Element[] = [];
+      const itemsInRow = Math.min(maxItemsPerRow, maxItems - i * maxItemsPerRow);
 
-      for (let j = i * maxItemsPerRow; j < Math.min((i + 1) * maxItemsPerRow, maxItems); j++) {
+      for (let j = i * maxItemsPerRow; j < i * maxItemsPerRow + itemsInRow; j++) {
         const imageLink = imageLinks[j];
+        const colSpan = maxItemsPerRow === 3 && itemsInRow === 1 ? 12 : 24 / itemsInRow;
         rowItems.push(
-          <Col span={8} key={j}>
+          <Col span={colSpan} key={j}>
             <ImageLink imgSrc={imageLink.imgSrc} product={imageLink.product} />
           </Col>
         );
@@ -119,21 +100,20 @@ export default function Home() {
 
     return rows;
   };
-
   return (
     <main className='flex min-h-screen flex-col gap-5 p-24'>
       <Row gutter={24}>
         <Col span={24}>
           <CustomCarousel enableArrow={true}>
-            <div>
-              <Typography.Title style={contentStyle} level={3}> 1 </Typography.Title>
-            </div>
-            <div>
-              <Typography.Title style={contentStyle} level={3}> 2 </Typography.Title>
-            </div>
-            <div>
-              <Typography.Title style={contentStyle} level={3}> 3 </Typography.Title>
-            </div>
+            {
+              Array.isArray(bannerData) && bannerData.map((banner: any, index: number) => {
+                return (
+                  <div key={index}>
+                    <Image src={banner.banner_image_url} alt={banner.campaign_name} width={"100%"} height={"200px"} />
+                  </div>
+                );
+              }) // Add closing parenthesis here
+            }
           </CustomCarousel>
         </Col>
       </Row>
@@ -152,12 +132,24 @@ export default function Home() {
         <Col span={4} />
         <Col span={16}>
           <CustomCarousel enableArrow={true}>
-            <CustomCard title='Cara Skincare Sukses' bordered={true} description='Yuk Sukses Skincare!' imgSrc='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'/>
-            <CustomCard title='Kenapa Youtube Gagal' bordered={true} description='Jangan Gagal Yutub' imgSrc='https://thumbs.dreamstime.com/z/close-up-logo-header-youtube-web-page-close-up-logo-header-youtube-web-page-youtube-297139593.jpg?w=992'/>
+            {
+              Array.isArray(articleData) && articleData.map((article: any, index: number) => {
+                return (
+                  <CustomCard
+                    key={index}
+                    title={article.title}
+                    bordered={true}
+                    description={article.content}
+                    imgSrc={article.main_image_url}
+                  />
+                );
+              }) // Add closing parenthesis here
+            }
           </CustomCarousel>
         </Col>
         <Col span={4} />
       </Row>
+      
     </main>
   );
 }

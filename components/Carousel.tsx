@@ -1,3 +1,4 @@
+"use client";
 import { Carousel as AntdCarousel, Row, Col } from 'antd';
 import Image from 'next/image';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
