@@ -110,18 +110,18 @@ export default function TnCPage() {
   return (
     <main className='flex text-black min-h-screen flex-col gap-5 px-8 py-8 md:px-20 lg:py-10 xl:px-32 xl:py-14 2xl:py-20 mb-10'>
       <h1 className="font-bold text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl text-center">Terms & Conditions</h1>
-      <div className="flex flex-col gap-3 lg:gap-4 mt-8 lg:mt-11">
-        <p className="text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">Perjanjian ini (“Perjanjian”, “Syarat dan Ketentuan”) merupakan perjanjian kontraktual yang mengikat secara hukum antara Anda (“Anda”) dan Khaloo. (“Khaloo”, “kami”, “milik kami” atau “kita”) sehubungan dengan penggunaan Anda atas situs web apa pun yang dioperasikan oleh atau atas nama Khaloo (masing-masing, sebuah “Situs Web”).</p>
-        <p className="text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">Kami menyarankan Anda untuk dengan seksama meninjau Syarat dan Ketentuan ini. Dengan menerima Syarat dan Ketentuan ini, Anda menyatakan bahwa: (i) Anda telah mencapai usia dewasa secara hukum di yurisdiksi tempat tinggal Anda; (ii) Anda menunjukkan penerimaan Anda atas, dan menyetujui untuk terikat secara hukum oleh, semua ketentuan Perjanjian ini, yang mengatur akses Anda ke Situs Web dan semua layanan, produk, materi, atau informasi yang tersedia di dalamnya; dan (iii) Anda setuju untuk mematuhi semua hukum dan peraturan yang berlaku, yang dapat berubah dari waktu ke waktu. Jika Anda tidak menerima dan setuju untuk terikat secara hukum oleh semua ketentuan Perjanjian ini, maka Anda tidak diizinkan untuk mengakses atau menggunakan Situs Web ini, dan Anda harus segera menghentikan penggunaannya. Disarankan untuk mencetak salinan Syarat dan Ketentuan ini untuk referensi Anda.</p>
+      <div className="flex flex-col gap-5 md:gap-6 lg:gap-7 mt-8 lg:mt-11 text-justify text-base lg:text-lg xl:text-xl 2xl:text-2xl">
+        <p className="leading-7 lg:leading-9 xl:leading-10 indent-6 lg:indent-10">Perjanjian ini (“Perjanjian”, “Syarat dan Ketentuan”) merupakan perjanjian kontraktual yang mengikat secara hukum antara Anda (“Anda”) dan Khaloo. (“Khaloo”, “kami”, “milik kami” atau “kita”) sehubungan dengan penggunaan Anda atas situs web apa pun yang dioperasikan oleh atau atas nama Khaloo (masing-masing, sebuah “Situs Web”).</p>
+        <p className="leading-7 lg:leading-9 xl:leading-10 indent-6 lg:indent-10">Kami menyarankan Anda untuk dengan seksama meninjau Syarat dan Ketentuan ini. Dengan menerima Syarat dan Ketentuan ini, Anda menyatakan bahwa: (i) Anda telah mencapai usia dewasa secara hukum di yurisdiksi tempat tinggal Anda; (ii) Anda menunjukkan penerimaan Anda atas, dan menyetujui untuk terikat secara hukum oleh, semua ketentuan Perjanjian ini, yang mengatur akses Anda ke Situs Web dan semua layanan, produk, materi, atau informasi yang tersedia di dalamnya; dan (iii) Anda setuju untuk mematuhi semua hukum dan peraturan yang berlaku, yang dapat berubah dari waktu ke waktu. Jika Anda tidak menerima dan setuju untuk terikat secara hukum oleh semua ketentuan Perjanjian ini, maka Anda tidak diizinkan untuk mengakses atau menggunakan Situs Web ini, dan Anda harus segera menghentikan penggunaannya. Disarankan untuk mencetak salinan Syarat dan Ketentuan ini untuk referensi Anda.</p>
       </div>
-      <ol className="flex flex-col mt-3 lg:mt-4 gap-8 lg:gap-9 text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">
+      <ol className="flex flex-col mt-3 lg:mt-4 gap-8 lg:gap-9 text-base lg:text-lg xl:text-xl 2xl:text-2xl text-justify">
         {dataTnC.map((data, index) => {
           return (
-            <li key={data.title} className="flex flex-col gap-3 lg:gap-4">
-              <h2 className="font-semibold"><span>{index + 1}. </span>{data.title}</h2>
-              <div className="flex flex-col gap-2 lg:gap-3">
+            <li key={data.title} className="flex flex-col">
+              <h2 className="font-semibold -mb-3 lg:-mb-4 text-left -indent-4 pl-4"><span>{index + 1}. </span>{data.title}</h2>
+              <div className="flex flex-col gap-5 md:gap-6 lg:gap-7">
                 {data.desc.split("\n").map((paragraph, index) => (
-                  <p key={index} className="leading-7 lg:leading-9 xl:leading-[44px]">{paragraph}</p>
+                  <p key={index} className="leading-7 lg:leading-9 xl:leading-10 indent-6 lg:indent-10">{paragraph}</p>
                 ))}
               </div>
             </li>
