@@ -1,6 +1,6 @@
 
-export default function loading() {
+export default function LoadingPage() {
   return (
-    <div>loading</div>
+    <div className="min-h-screen m-auto">Loading</div>
   )
 }
