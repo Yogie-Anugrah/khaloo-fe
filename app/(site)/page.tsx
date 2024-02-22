@@ -1,15 +1,13 @@
 "use client";
-import CustomCard from '@/components/Card';
 import CustomCarousel from '@/components/Carousel';
 import ImageLink from '@/components/ImageLink';
 import Typography from '@/components/Typography';
+import VideoCard from '@/components/VideoCard';
+import { YoutubeData } from '@/components/YoutubePlayer';
 import { Col, Image, Row } from 'antd';
 import Link from 'antd/es/typography/Link';
 import React from 'react';
 import { API_URL } from '../../libs/constant';
-
-// import YouTubePlayer from '../../components/YoutubePlayer';
-
 
 const getData = async () => {
   const response = await fetch(`${API_URL}/home/banners`, { cache: "no-cache" });
@@ -32,9 +30,9 @@ const getHighlightData = async () => {
   return data;
 }
 
-const getArticleData = async () => {
+const getYoutubeData = async () => {
+  const response = await fetch(`${API_URL}/youtube/videos/top`, { cache: "no-cache" });
 
-  const response = await fetch(`${API_URL}/articles/top`, { cache: "no-cache" });
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -45,8 +43,7 @@ const getArticleData = async () => {
 export default async function Home() {
   const bannerData = await getData();
   const highlightData = await getHighlightData();
-  const articleData = await getArticleData();
-
+  const youtubeData = await getYoutubeData();
 
   const imageLinks: Array<{
     imgSrc: string;
@@ -136,20 +133,27 @@ export default async function Home() {
 
     return rows;
   };
+
+  const renderYoutubeData = () => {
+    if (Array.isArray(youtubeData)) {
+      return youtubeData.map((video: YoutubeData, index: number) => (
+        <VideoCard key={index} video={video} />
+      ));
+    }
+    return null;
+  };
+
   return (
     <main className='flex min-h-screen flex-col gap-5 p-24'>
       <Row gutter={24}>
         <Col span={24}>
           <CustomCarousel enableArrow={true}>
-            {
-              Array.isArray(bannerData) && bannerData.map((banner: any, index: number) => {
-                return (
-                  <div key={index}>
-                    <Image src={banner.banner_image_url} alt={banner.campaign_name} width={"100%"} height={"200px"} />
-                  </div>
-                );
-              }) // Add closing parenthesis here
-            }
+            {Array.isArray(bannerData) &&
+              bannerData.map((banner: any, index: number) => (
+                <div key={index}>
+                  <Image src={banner.banner_image_url} alt={banner.campaign_name} width={'100%'} height={'200px'} />
+                </div>
+              ))}
           </CustomCarousel>
         </Col>
       </Row>
@@ -170,25 +174,10 @@ export default async function Home() {
       <Row gutter={24}>
         <Col span={4} />
         <Col span={16}>
-          <CustomCarousel enableArrow={true}>
-            {
-              Array.isArray(articleData) && articleData.map((article: any, index: number) => {
-                return (
-                  <CustomCard
-                    key={index}
-                    title={article.title}
-                    bordered={true}
-                    description={article.content}
-                    imgSrc={article.main_image_url}
-                  />
-                );
-              }) // Add closing parenthesis here
-            }
-          </CustomCarousel>
+          <CustomCarousel enableArrow={true}>{renderYoutubeData()}</CustomCarousel>
         </Col>
         <Col span={4} />
       </Row>
-
-    </main>
+    </main >
   );
 }

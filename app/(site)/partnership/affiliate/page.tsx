@@ -6,6 +6,7 @@ import { Col, Row, Button, Form, Input, Select, Checkbox, Modal} from 'antd';
 import { GlobalOutlined, ShoppingOutlined, AppleOutlined, ShoppingCartOutlined, DollarOutlined } from '@ant-design/icons';
 
 import { ReactNode } from 'react';
+import { API_URL } from '../../../../libs/constant';
 
 interface BoxComponentProps {
     icon?: ReactNode;
@@ -34,11 +35,46 @@ const PartnerWithUsResellerPage: React.FC = () => {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
-    const onFinish = (values: any) => {
+    const onFinish = async (values: {
+        firstName: string; 
+        lastName: string; 
+        email: string; 
+        provinceID: 
+        string; 
+        city: string; 
+        address: string; 
+        instagram: string; 
+        tiktok: string; 
+        facebook: string; 
+        whatsapp: string; 
+        termsAndConditions: boolean; 
+        role: string | undefined | null; 
+    }) => {
         console.log('Form values:', values);
         // Add your logic here to handle form submission
+        values.role = 'Affiliate'
         showModal();
-    };
+        try {
+            const response = await fetch(`${API_URL}/partnership/createPartnership`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(values),
+            });
+        
+            if (response.ok) {
+              // Handle successful response
+              showModal();
+            } else {
+              // Handle error response
+              throw new Error('Failed to create partnership');
+            }
+          } catch (error) {
+            // Handle fetch error
+            console.error(error);
+          }
+    }
     return (
         <main className='flex min-h-screen flex-col gap-5 p-24'>
         <Row gutter={24}>
