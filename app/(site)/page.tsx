@@ -9,10 +9,11 @@ import { API_URL } from '../../libs/constant';
 import Link from 'antd/es/typography/Link';
 import MarketPlaceCard, { MarketPlaceCardProps } from "@/components/market-place-card";
 import { Modal } from "antd";
+// import YouTubePlayer from '../../components/YoutubePlayer';
 
 
 const getData = async () => {
-  const response = await fetch(`${API_URL}/home/banners`);
+  const response = await fetch(`${API_URL}/home/banners`, { cache: "no-cache" });
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -21,7 +22,7 @@ const getData = async () => {
 }
 
 const getHighlightData = async () => {
-  const response = await fetch(`${API_URL}/products/highlight`);
+  const response = await fetch(`${API_URL}/products/highlight`, { cache: "no-cache" });
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -30,7 +31,7 @@ const getHighlightData = async () => {
 }
 
 const getArticleData = async () => {
-  const response = await fetch(`${API_URL}/articles/top`);
+  const response = await fetch(`${API_URL}/youtube/articles/top`, { cache: "no-cache" });
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -74,26 +75,58 @@ export default async function Home() {
 
   const renderImageLinks = () => {
     const rows: JSX.Element[] = [];
-    const maxItemsPerRow = 3;
-    const maxItems = Math.min(imageLinks.length, 6);
+    const maxItems = imageLinks.length;
 
-    for (let i = 0; i < Math.ceil(maxItems / maxItemsPerRow); i++) {
-      const rowItems: JSX.Element[] = [];
-      const itemsInRow = Math.min(maxItemsPerRow, maxItems - i * maxItemsPerRow);
-
-      for (let j = i * maxItemsPerRow; j < i * maxItemsPerRow + itemsInRow; j++) {
-        const imageLink = imageLinks[j];
-        const colSpan = maxItemsPerRow === 3 && itemsInRow === 1 ? 12 : 24 / itemsInRow;
-        rowItems.push(
-          <Col span={colSpan} key={j}>
-            <ImageLink imgSrc={imageLink.imgSrc} product={imageLink.product} />
-          </Col>
-        );
-      }
-
+    if (maxItems === 3) {
       rows.push(
-        <Row gutter={24} key={i}>
-          {rowItems}
+        <Row gutter={24} key={0}>
+          <Col className='gutter-row' span={12}>
+            <ImageLink imgSrc={imageLinks[0].imgSrc} product={imageLinks[0].product} />
+          </Col>
+          <Col className='gutter-row' span={12}>
+            <Row style={{marginBottom: '20px'}} gutter={24}>
+              <Col className='gutter-row' span={12}>
+                <ImageLink imgSrc={imageLinks[1].imgSrc} product={imageLinks[1].product} />
+              </Col>
+              <Col className='gutter-row' span={12}>
+                {/* <ImageLink imgSrc={imageLinks[2].imgSrc} product={imageLinks[2].product} /> */}
+              </Col>
+            </Row>
+            <Row style={{marginTop: '20px'}} gutter={24}>
+              <Col className='gutter-row' span={12}>
+                <ImageLink imgSrc={imageLinks[2].imgSrc} product={imageLinks[2].product} />
+              </Col>
+              <Col className='gutter-row' span={12}>
+                {/* <ImageLink imgSrc={imageLinks[4].imgSrc} product={imageLinks[4].product} /> */}
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      );
+    } else if (maxItems === 5) {
+      rows.push(
+        <Row gutter={24} key={0}>
+          <Col className='gutter-row' span={12}>
+            <ImageLink imgSrc={imageLinks[0].imgSrc} product={imageLinks[0].product} />
+          </Col>
+          <Col className='gutter-row' span={12}>
+            <Row style={{marginBottom: '20px'}} gutter={24}>
+              <Col className='gutter-row' span={12}>
+                <ImageLink imgSrc={imageLinks[1].imgSrc} product={imageLinks[1].product} />
+              </Col>
+              <Col className='gutter-row' span={12}>
+                <ImageLink imgSrc={imageLinks[2].imgSrc} product={imageLinks[2].product} />
+              </Col>
+            </Row>
+            <Row style={{marginTop: '20px'}} gutter={24}>
+              <Col className='gutter-row' span={12}>
+                <ImageLink imgSrc={imageLinks[3].imgSrc} product={imageLinks[3].product} />
+              </Col>
+              <Col className='gutter-row' span={12}>
+                <ImageLink imgSrc={imageLinks[4].imgSrc} product={imageLinks[4].product} />
+              </Col>
+            </Row>
+          </Col>
         </Row>
       );
     }
