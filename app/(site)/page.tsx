@@ -9,11 +9,13 @@ import { API_URL } from '../../libs/constant';
 import Link from 'antd/es/typography/Link';
 import MarketPlaceCard, { MarketPlaceCardProps } from "@/components/market-place-card";
 import { Modal } from "antd";
+
 // import YouTubePlayer from '../../components/YoutubePlayer';
 
 
 const getData = async () => {
   const response = await fetch(`${API_URL}/home/banners`, { cache: "no-cache" });
+
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -22,7 +24,9 @@ const getData = async () => {
 }
 
 const getHighlightData = async () => {
+
   const response = await fetch(`${API_URL}/products/highlight`, { cache: "no-cache" });
+
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -31,6 +35,7 @@ const getHighlightData = async () => {
 }
 
 const getArticleData = async () => {
+
   const response = await fetch(`${API_URL}/articles/top`, { cache: "no-cache" });
   if (!response.ok) {
     throw new Error('Network response was not ok');
