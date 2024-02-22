@@ -163,11 +163,14 @@ export default async function Home() {
         </Col>
       </Row>
       {renderImageLinks()}
-      <Row gutter={24}>
-        <Col span={24}>
-          <Typography.Title level={2}>Our Stories</Typography.Title>
-        </Col>
-      </Row>
+      <div id="our-stories">
+        <Row gutter={24}>
+          <Col span={24}>
+            <Typography.Title level={2}>Our Stories</Typography.Title>
+          </Col>
+        </Row>
+      </div>
+
       <Row gutter={24}>
         <Col span={4} />
         <Col span={16}>
@@ -175,6 +178,6 @@ export default async function Home() {
         </Col>
         <Col span={4} />
       </Row>
-    </main>
+    </main >
   );
 }
