@@ -4,11 +4,12 @@ import CardProduct from '@/components/card-product';
 import { currencyFormatter, dateTimeFormatter, viewFormatter } from '@/utils/utils';
 import Image from 'next/image';
 import Link from 'next/link';
+import { API_URL } from '../../../../libs/constant';
 
 
 async function getDetailProduct({ id }: { id: string }) {
   try {
-    const res = await fetch(`https://khaloo-be-nine.vercel.app/products/${id}`, { cache: "no-cache" });
+    const res = await fetch(`${API_URL}/products/${id}`, { cache: "no-cache" });
 
     if (!res.ok) {
       throw new Error('Failed to fetch detail product data');
@@ -25,7 +26,7 @@ async function getDetailProduct({ id }: { id: string }) {
 
 async function getProducts() {
   try {
-    const res = await fetch('https://khaloo-be-nine.vercel.app/products/list', { cache: "no-cache" });
+    const res = await fetch(`${API_URL}/products/list`, { cache: "no-cache" });
 
     if (!res.ok) {
       throw new Error('Failed to fetch products');

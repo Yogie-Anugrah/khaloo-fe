@@ -1,3 +1,4 @@
+"use client";
 import React from 'react';
 
 interface ImageLinkProps {
@@ -8,8 +9,8 @@ interface ImageLinkProps {
         subTitle: string;
         action1Label: string;
         action2Label: string;
-        action1OnClick: () => void;
-        action2OnClick: () => void;
+        action1OnClick: React.ReactNode;
+        action2OnClick: React.ReactNode;
     }
 }
 const ImageLink = ({imgSrc, product} : ImageLinkProps) => {
@@ -29,8 +30,8 @@ const ImageLink = ({imgSrc, product} : ImageLinkProps) => {
                     <h2 className="text-white text-lg font-bold mb-2">{product.title}</h2>
                     <p className="text-white text-sm mb-4">{product.subTitle}</p>
                     <div className="flex space-x-2">
-                        <button onClick={product.action1OnClick} className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded">Shop Now</button>
-                        <button onClick={product.action2OnClick} className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Shop Detail</button>
+                        <button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded">{product.action1OnClick}</button>
+                        <button className="text-black bg-white border border-magenta-500 px-4 py-2 rounded">{product.action2OnClick}</button>
                     </div>
                 </div>
             </div>
