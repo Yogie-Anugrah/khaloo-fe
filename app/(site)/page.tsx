@@ -1,15 +1,13 @@
 "use client";
-import Typography from '@/components/Typography';
-import { Col, Row, Image } from 'antd';
 import CustomCarousel from '@/components/Carousel';
 import ImageLink from '@/components/ImageLink';
-import React from 'react';
-import { API_URL } from '../../libs/constant';
-import Link from 'antd/es/typography/Link';
+import Typography from '@/components/Typography';
 import VideoCard from '@/components/VideoCard';
 import { YoutubeData } from '@/components/YoutubePlayer';
-import MarketPlaceCard, { MarketPlaceCardProps } from "@/components/market-place-card";
-import { Modal } from "antd";
+import { Col, Image, Row } from 'antd';
+import Link from 'antd/es/typography/Link';
+import React from 'react';
+import { API_URL } from '../../libs/constant';
 
 const getData = async () => {
   const response = await fetch(`${API_URL}/home/banners`, { cache: "no-cache" });
@@ -86,7 +84,7 @@ export default async function Home() {
             <ImageLink imgSrc={imageLinks[0].imgSrc} product={imageLinks[0].product} />
           </Col>
           <Col className='gutter-row' span={12}>
-            <Row style={{marginBottom: '20px'}} gutter={24}>
+            <Row style={{ marginBottom: '20px' }} gutter={24}>
               <Col className='gutter-row' span={12}>
                 <ImageLink imgSrc={imageLinks[1].imgSrc} product={imageLinks[1].product} />
               </Col>
@@ -94,7 +92,7 @@ export default async function Home() {
                 {/* <ImageLink imgSrc={imageLinks[2].imgSrc} product={imageLinks[2].product} /> */}
               </Col>
             </Row>
-            <Row style={{marginTop: '20px'}} gutter={24}>
+            <Row style={{ marginTop: '20px' }} gutter={24}>
               <Col className='gutter-row' span={12}>
                 <ImageLink imgSrc={imageLinks[2].imgSrc} product={imageLinks[2].product} />
               </Col>
@@ -112,7 +110,7 @@ export default async function Home() {
             <ImageLink imgSrc={imageLinks[0].imgSrc} product={imageLinks[0].product} />
           </Col>
           <Col className='gutter-row' span={12}>
-            <Row style={{marginBottom: '20px'}} gutter={24}>
+            <Row style={{ marginBottom: '20px' }} gutter={24}>
               <Col className='gutter-row' span={12}>
                 <ImageLink imgSrc={imageLinks[1].imgSrc} product={imageLinks[1].product} />
               </Col>
@@ -120,7 +118,7 @@ export default async function Home() {
                 <ImageLink imgSrc={imageLinks[2].imgSrc} product={imageLinks[2].product} />
               </Col>
             </Row>
-            <Row style={{marginTop: '20px'}} gutter={24}>
+            <Row style={{ marginTop: '20px' }} gutter={24}>
               <Col className='gutter-row' span={12}>
                 <ImageLink imgSrc={imageLinks[3].imgSrc} product={imageLinks[3].product} />
               </Col>
