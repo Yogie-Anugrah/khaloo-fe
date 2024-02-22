@@ -31,7 +31,7 @@ const getHighlightData = async () => {
 }
 
 const getArticleData = async () => {
-  const response = await fetch(`${API_URL}/youtube/articles/top`, { cache: "no-cache" });
+  const response = await fetch(`${API_URL}/articles/top`, { cache: "no-cache" });
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
