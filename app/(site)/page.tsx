@@ -8,9 +8,12 @@ import { API_URL } from '../../libs/constant';
 import Link from 'antd/es/typography/Link';
 import VideoCard from '@/components/VideoCard';
 import { YoutubeData } from '@/components/YoutubePlayer';
+import MarketPlaceCard, { MarketPlaceCardProps } from "@/components/market-place-card";
+import { Modal } from "antd";
 
 const getData = async () => {
   const response = await fetch(`${API_URL}/home/banners`, { cache: "no-cache" });
+
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -19,7 +22,9 @@ const getData = async () => {
 }
 
 const getHighlightData = async () => {
+
   const response = await fetch(`${API_URL}/products/highlight`, { cache: "no-cache" });
+
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
@@ -29,6 +34,7 @@ const getHighlightData = async () => {
 
 const getYoutubeData = async () => {
   const response = await fetch(`${API_URL}/youtube/videos/top`, { cache: "no-cache" });
+
   if (!response.ok) {
     throw new Error('Network response was not ok');
   }
