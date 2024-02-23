@@ -8,15 +8,16 @@ const socialMedias = [
     links: [
       {
         title: 'About Us',
-        href: '/about-us',
+        href: '/#our-stories',
       },
       {
-        title: 'Partner With Us',
-        href: '/partner-with-us',
+        title: 'Partnership',
+        href: '/partnership',
       },
+
       {
-        title: 'Our Store',
-        href: '/our-store',
+        title: 'In-Store',
+        href: '/find-us?filter=locations',
       },
     ],
   },
@@ -26,10 +27,6 @@ const socialMedias = [
       {
         title: 'FAQ',
         href: '/faq',
-      },
-      {
-        title: 'Career',
-        href: '/career',
       },
       {
         title: 'Terms & Condition',
@@ -89,28 +86,28 @@ const onlineStores = [
     icons: [
       {
         link: 'http://tiny.cc/profiletokopediakhaloo',
-        url: '/assets/images/tokopedia.png',
+        url: '/assets/images/tokopedia-black.png',
         alt: 'tokopedia',
         width: 40,
         height: 40,
       },
       {
         link: 'http://tiny.cc/profileshopeekhaloo',
-        url: '/assets/icons/shopee.svg',
+        url: '/assets/images/shopee-black.png',
         alt: 'shopee',
         width: 40,
         height: 40,
       },
       {
         link: 'http://tiny.cc/profilebliblikhaloo',
-        url: '/assets/icons/blibli.svg',
+        url: '/assets/images/blibli-black.png',
         alt: 'blibli',
         width: 40,
         height: 40,
       },
       {
         link: 'http://tiny.cc/profilelazadakhaloo',
-        url: '/assets/icons/lazada.svg',
+        url: '/assets/images/lazada-black.png',
         alt: 'lazada',
         width: 40,
         height: 40,
@@ -151,7 +148,7 @@ export default function Footer() {
             Ikuti Berita terbaru Khaloo
           </p>
           <p className='text-sm font-semibold text-secondary-1 lg:text-base'>
-            Dapatkan diskon 10% pembelian pertama
+            Dapatkan diskon 25% pembelian pertama
           </p>
           {/* Mailchimp subcription */}
           <div className='mt-3 flex w-fit flex-col items-center rounded-lg max-lg:gap-3 lg:flex-row lg:bg-white'>
@@ -203,7 +200,7 @@ export default function Footer() {
                       key={icon.url}
                       href={icon.link}
                       target='_blank'
-                      className='transition-all duration-300 hover:scale-105'
+                      className='transition-all duration-300 hover:scale-[120%]'
                     >
                       <Image
                         src={icon.url}
@@ -213,7 +210,6 @@ export default function Footer() {
                         sizes={icon.width + 'px'}
                         className={clsx(
                           'aspect-square object-contain object-center',
-                          index == 1 && 'rounded-md bg-white p-1'
                         )}
                       />
                     </Link>

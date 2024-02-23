@@ -1,9 +1,11 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 
 export default function NavbarWithoutSearchnPath() {
+  const [isLogin, setIsLogin] = useState(false);
 
   return (
     <nav
@@ -30,16 +32,26 @@ export default function NavbarWithoutSearchnPath() {
       </Link>
 
       {/* Login Icon */}
-      <button >
-        <Image
-          height={40}
-          width={40}
-          src='/assets/icons/person.svg'
-          alt='Person Icon'
-          className='aspect-square w-9 sm:w-10'
-          sizes='(max-width: 640px) 28px, 40px'
-        />
-      </button>
+      {isLogin ? (
+        <button
+          onClick={() => setIsLogin(false)}
+        >
+          <Image
+            height={40}
+            width={40}
+            src='/assets/icons/person.svg'
+            alt='Person Icon'
+            className='aspect-square w-9 sm:w-10'
+            sizes='(max-width: 640px) 28px, 40px'
+          />
+        </button>
+      ) : (
+        <button
+          onClick={() => setIsLogin(true)}
+          className={("py-0.5 px-2 border-2 border-black rounded-lg text-black text-sm md:text-base lg:text-lg hover:brightness-[60%] transition-all duration-300")}>
+          Login
+        </button>)
+      }
     </nav >
   );
 }
