@@ -58,20 +58,22 @@ export default async function Home() {
     };
   }> = [];
 
-  highlightData.forEach((highlight: any) => {
-    imageLinks.push({
-      imgSrc: highlight.prod_main_img,
-      product: {
-        id: highlight.prod_id,
-        title: highlight.prod_name,
-        subTitle: `Rp. ${highlight.prod_price.toLocaleString('id-ID')}`,
-        action1Label: 'Shop Now',
-        action2Label: 'Shop Detail',
-        action1OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'white' }}>Shop Now</Link>,
-        action2OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'black' }}>Shop Detail</Link>,
-      }
+  if (Array.isArray(highlightData)) {
+    highlightData.forEach((highlight: any) => {
+      imageLinks.push({
+        imgSrc: highlight.prod_main_img,
+        product: {
+          id: highlight.prod_id,
+          title: highlight.prod_name,
+          subTitle: `Rp. ${highlight.prod_price.toLocaleString('id-ID')}`,
+          action1Label: 'Shop Now',
+          action2Label: 'Shop Detail',
+          action1OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'white' }}>Shop Now</Link>,
+          action2OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'black' }}>Shop Detail</Link>,
+        }
+      });
     });
-  });
+  }
 
   const renderImageLinks = () => {
     const rows: JSX.Element[] = [];
@@ -144,14 +146,14 @@ export default async function Home() {
   };
 
   return (
-    <main className='flex min-h-screen flex-col gap-5 p-24'>
+    <main className='flex min-h-screen flex-col gap-5 p-8'>
       <Row gutter={24}>
         <Col span={24}>
           <CustomCarousel enableArrow={true}>
             {Array.isArray(bannerData) &&
               bannerData.map((banner: any, index: number) => (
-                <div key={index}>
-                  <Image src={banner.banner_image_url} alt={banner.campaign_name} width={'100%'} height={'200px'} />
+                <div key={index} style={{ borderRadius: '10px' }}>
+                  <img src={banner.banner_image_url} alt={banner.campaign_name} style={{ width: '100%', height: '200px', borderRadius: '10px' }} />
                 </div>
               ))}
           </CustomCarousel>

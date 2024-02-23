@@ -10,7 +10,7 @@ interface CarouselProps extends AntdCarouselProps {
   enableArrow?: boolean | undefined;  // Add a new prop to enable or disable the arrows in the carousel
 }
 
-export default function Carousel({ children, enableArrow }: CarouselProps) {
+export default function Carousel({ children, enableArrow, ...resProps }: CarouselProps) {
   const carouselRef = React.useRef<CarouselRef>(null); // Specify the correct type for 'carouselRef'
 
   const next = () => {
@@ -35,7 +35,7 @@ export default function Carousel({ children, enableArrow }: CarouselProps) {
         </Col>
       )}
       <Col span={enableArrow ? 22 : 24}>
-        <AntdCarousel ref={carouselRef}>
+        <AntdCarousel {...resProps} ref={carouselRef}>
           {children}
         </AntdCarousel>
       </Col>
