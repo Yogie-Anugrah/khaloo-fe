@@ -90,16 +90,17 @@ export default function FAQClient() {
   }, [search]);
 
   return (
-    <div className="flex flex-col mt-12 lg:mt-16 gap-8 lg:gap-9 text-lg lg:text-xl xl:text-2xl 2xl:text-3xl">
+    <div className="flex flex-col mt-12 lg:mt-16 gap-8 lg:gap-9 text-base lg:text-lg xl:text-xl 2xl:text-2xl text-justify">
       <SearchInput
         placeholder="Cari pertanyaanmu disini"
+
         onChange={(e) => setSearch(e.target.value)}
         value={search}
       />
       {Boolean(filteredData.length) ? (
         <Accordion data={filteredData} />
       ) : (
-        <p className="text-center font-bold">Not Found</p>
+        <p className="text-center font-bold">Not Result Found for {'"' + search + '"'}</p>
       )}
     </div>
   );

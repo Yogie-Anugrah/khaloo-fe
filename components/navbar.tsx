@@ -21,7 +21,7 @@ const navData = [
   },
   {
     name: 'PARTNERSHIP',
-    path: '/partner-with-us',
+    path: '/partnership',
   },
   {
     name: 'FIND-US',
@@ -30,6 +30,7 @@ const navData = [
 ];
 
 export default function Navbar() {
+  const [isLogin, setIsLogin] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isSearchResultOpen, setIsSearchResultOpen] = useState(false);
   const [navBarExpanded, setNavbarExpanded] = useState(false);
@@ -207,17 +208,25 @@ export default function Navbar() {
               isSearchOpen={isSearchOpen}
               isSearchResultOpen={isSearchResultOpen}
             />
-            <button
-              className={clsx(isSearchOpen && "max-md:hidden")}>
-              <Image
-                height={40}
-                width={40}
-                src='/assets/icons/person.svg'
-                alt='Person Icon'
-                className='aspect-square w-8 sm:w-10'
-                sizes='(max-width: 640px) 28px, 40px'
-              />
-            </button>
+            {isLogin ? (
+              <button
+                onClick={() => setIsLogin(false)}
+                className={clsx(isSearchOpen && "max-md:hidden")}>
+                <Image
+                  height={40}
+                  width={40}
+                  src='/assets/icons/person.svg'
+                  alt='Person Icon'
+                  className='aspect-square w-8 sm:w-10'
+                  sizes='(max-width: 640px) 28px, 40px'
+                />
+              </button>
+            ) : (
+              <button
+                onClick={() => setIsLogin(true)}
+                className={clsx("py-0.5 px-2 border-2 border-black rounded-lg text-black text-sm md:text-base lg:text-lg hover:brightness-[60%] transition-all duration-300", isSearchOpen && "max-md:hidden")}>
+                Login
+              </button>)}
             <button
               className={clsx(isSearchOpen && "max-md:hidden", 'flex items-center gap-2')}
             >

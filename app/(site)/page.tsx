@@ -1,15 +1,13 @@
 "use client";
-import Typography from '@/components/Typography';
-import { Col, Row, Image } from 'antd';
 import CustomCarousel from '@/components/Carousel';
 import ImageLink from '@/components/ImageLink';
-import React from 'react';
-import { API_URL } from '../../libs/constant';
-import Link from 'antd/es/typography/Link';
+import Typography from '@/components/Typography';
 import VideoCard from '@/components/VideoCard';
 import { YoutubeData } from '@/components/YoutubePlayer';
-import MarketPlaceCard, { MarketPlaceCardProps } from "@/components/market-place-card";
-import { Modal } from "antd";
+import { Col, Image, Row } from 'antd';
+import Link from 'antd/es/typography/Link';
+import React from 'react';
+import { API_URL } from '../../libs/constant';
 
 const getData = async () => {
   const response = await fetch(`${API_URL}/home/banners`, { cache: "no-cache" });
@@ -60,20 +58,22 @@ export default async function Home() {
     };
   }> = [];
 
-  highlightData.forEach((highlight: any) => {
-    imageLinks.push({
-      imgSrc: highlight.prod_main_img,
-      product: {
-        id: highlight.prod_id,
-        title: highlight.prod_name,
-        subTitle: `Rp. ${highlight.prod_price.toLocaleString('id-ID')}`,
-        action1Label: 'Shop Now',
-        action2Label: 'Shop Detail',
-        action1OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'white' }}>Shop Now</Link>,
-        action2OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'black' }}>Shop Detail</Link>,
-      }
+  if (Array.isArray(highlightData)) {
+    highlightData.forEach((highlight: any) => {
+      imageLinks.push({
+        imgSrc: highlight.prod_main_img,
+        product: {
+          id: highlight.prod_id,
+          title: highlight.prod_name,
+          subTitle: `Rp. ${highlight.prod_price.toLocaleString('id-ID')}`,
+          action1Label: 'Shop Now',
+          action2Label: 'Shop Detail',
+          action1OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'white' }}>Shop Now</Link>,
+          action2OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'black' }}>Shop Detail</Link>,
+        }
+      });
     });
-  });
+  }
 
   const renderImageLinks = () => {
     const rows: JSX.Element[] = [];
@@ -86,7 +86,7 @@ export default async function Home() {
             <ImageLink imgSrc={imageLinks[0].imgSrc} product={imageLinks[0].product} />
           </Col>
           <Col className='gutter-row' span={12}>
-            <Row style={{marginBottom: '20px'}} gutter={24}>
+            <Row style={{ marginBottom: '20px' }} gutter={24}>
               <Col className='gutter-row' span={12}>
                 <ImageLink imgSrc={imageLinks[1].imgSrc} product={imageLinks[1].product} />
               </Col>
@@ -94,7 +94,7 @@ export default async function Home() {
                 {/* <ImageLink imgSrc={imageLinks[2].imgSrc} product={imageLinks[2].product} /> */}
               </Col>
             </Row>
-            <Row style={{marginTop: '20px'}} gutter={24}>
+            <Row style={{ marginTop: '20px' }} gutter={24}>
               <Col className='gutter-row' span={12}>
                 <ImageLink imgSrc={imageLinks[2].imgSrc} product={imageLinks[2].product} />
               </Col>
@@ -112,7 +112,7 @@ export default async function Home() {
             <ImageLink imgSrc={imageLinks[0].imgSrc} product={imageLinks[0].product} />
           </Col>
           <Col className='gutter-row' span={12}>
-            <Row style={{marginBottom: '20px'}} gutter={24}>
+            <Row style={{ marginBottom: '20px' }} gutter={24}>
               <Col className='gutter-row' span={12}>
                 <ImageLink imgSrc={imageLinks[1].imgSrc} product={imageLinks[1].product} />
               </Col>
@@ -120,7 +120,7 @@ export default async function Home() {
                 <ImageLink imgSrc={imageLinks[2].imgSrc} product={imageLinks[2].product} />
               </Col>
             </Row>
-            <Row style={{marginTop: '20px'}} gutter={24}>
+            <Row style={{ marginTop: '20px' }} gutter={24}>
               <Col className='gutter-row' span={12}>
                 <ImageLink imgSrc={imageLinks[3].imgSrc} product={imageLinks[3].product} />
               </Col>
@@ -146,14 +146,14 @@ export default async function Home() {
   };
 
   return (
-    <main className='flex min-h-screen flex-col gap-5 p-24'>
+    <main className='flex min-h-screen flex-col gap-5 p-8'>
       <Row gutter={24}>
         <Col span={24}>
           <CustomCarousel enableArrow={true}>
             {Array.isArray(bannerData) &&
               bannerData.map((banner: any, index: number) => (
-                <div key={index}>
-                  <Image src={banner.banner_image_url} alt={banner.campaign_name} width={'100%'} height={'200px'} />
+                <div key={index} style={{ borderRadius: '10px' }}>
+                  <img src={banner.banner_image_url} alt={banner.campaign_name} style={{ width: '100%', height: '200px', borderRadius: '10px' }} />
                 </div>
               ))}
           </CustomCarousel>
@@ -165,11 +165,14 @@ export default async function Home() {
         </Col>
       </Row>
       {renderImageLinks()}
-      <Row gutter={24}>
-        <Col span={24}>
-          <Typography.Title level={2}>Our Stories</Typography.Title>
-        </Col>
-      </Row>
+      <div id="our-stories">
+        <Row gutter={24}>
+          <Col span={24}>
+            <Typography.Title level={2}>Our Stories</Typography.Title>
+          </Col>
+        </Row>
+      </div>
+
       <Row gutter={24}>
         <Col span={4} />
         <Col span={16}>
@@ -177,6 +180,6 @@ export default async function Home() {
         </Col>
         <Col span={4} />
       </Row>
-    </main>
+    </main >
   );
 }
