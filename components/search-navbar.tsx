@@ -1,126 +1,28 @@
+import { API_URL } from '@/libs/constant';
 import { currencyFormatter } from '@/utils/utils';
 import clsx from 'clsx';
+import debounce from 'lodash.debounce';
 import Image from 'next/image';
-import { useMemo, type Dispatch, type SetStateAction } from 'react';
+import { useEffect, useState, type Dispatch, type SetStateAction } from 'react';
 
-interface Product {
-  name: string;
-  price: number;
-  category: string;
+type DataPromise = {
+  title: string;
+  desc: string;
+  imageUrl: string;
 }
 
-// Define the categorized data type
-type CategorizedData = {
-  [category: string]: Product[];
+type CombinedResults = {
+  product: {
+    title: string;
+    data: DataPromise[];
+  };
+  location: {
+    title: string;
+    data: DataPromise[];
+  };
 };
 
-const dummyData = [
-  {
-    name: 'Serum Muda Mulus',
-    price: 150000,
-    category: 'Perawatan Wajah',
-  },
-  {
-    name: 'Masker Rambut Indah',
-    price: 120000,
-    category: 'Perawatan Rambut',
-  },
-  {
-    name: 'Lipstik Velvet Elegan',
-    price: 80000,
-    category: 'Makeup',
-  },
-  {
-    name: 'Peeling Tubuh Bersinar',
-    price: 200000,
-    category: 'Perawatan Tubuh',
-  },
-  {
-    name: 'Eyeliner Tahan Lama',
-    price: 60000,
-    category: 'Makeup',
-  },
-  {
-    name: 'Krim Malam Vitalitas',
-    price: 250000,
-    category: 'Perawatan Kulit',
-  },
-  {
-    name: 'Maskara Volume Ekstra',
-    price: 75000,
-    category: 'Makeup',
-  },
-  {
-    name: 'Pelembab Siang Segar',
-    price: 180000,
-    category: 'Perawatan Wajah',
-  },
-  {
-    name: 'Shampoo Organik',
-    price: 100000,
-    category: 'Perawatan Rambut',
-  },
-  {
-    name: 'Bedak Compact Matte',
-    price: 90000,
-    category: 'Makeup',
-  },
-  {
-    name: 'Lulur Bali Relax',
-    price: 220000,
-    category: 'Perawatan Tubuh',
-  },
-  {
-    name: 'Pensil Alis Presisi',
-    price: 50000,
-    category: 'Makeup',
-  },
-  {
-    name: 'Toner Aloe Vera',
-    price: 120000,
-    category: 'Perawatan Kulit',
-  },
-  {
-    name: 'Lip Balm Berwarna',
-    price: 70000,
-    category: 'Makeup',
-  },
-  {
-    name: 'Krim Mata Anti-Penuaan',
-    price: 280000,
-    category: 'Perawatan Wajah',
-  },
-  {
-    name: 'Minyak Rambut Aromaterapi',
-    price: 150000,
-    category: 'Perawatan Rambut',
-  },
-  {
-    name: 'Eyeshadow Palet Profesional',
-    price: 120000,
-    category: 'Makeup',
-  },
-  {
-    name: 'Sabun Mandi Pewangi Mawar',
-    price: 80000,
-    category: 'Perawatan Tubuh',
-  },
-  {
-    name: 'Pembersih Wajah Micellar',
-    price: 90000,
-    category: 'Perawatan Kulit',
-  },
-  {
-    name: 'Mascara Waterproof',
-    price: 65000,
-    category: 'Makeup',
-  },
-  {
-    name: 'Krim Pemutih Malam',
-    price: 210000,
-    category: 'Perawatan Wajah',
-  },
-];
+type ResultKeys = keyof CombinedResults;
 
 export default function SearchNavbar({
   isSearchOpen,
@@ -137,28 +39,50 @@ export default function SearchNavbar({
   setIsSearchResultOpen: Dispatch<SetStateAction<boolean>>;
   setIsSearchOpen: Dispatch<SetStateAction<boolean>>;
 }) {
-  // Categorize the filtered data
-  const categorizeFilteredData: CategorizedData = useMemo(() => {
-    // Filter the data
-    const filteredData = dummyData.filter(
-      (data) =>
-        searchResult ?
-          (data.name.toLowerCase().includes(searchResult.toLowerCase()) ||
-            data.category.toLowerCase().includes(searchResult.toLowerCase())) : ""
-    );
+  const [filteredData, setFilteredData] = useState<CombinedResults>({ product: { title: '', data: [] }, location: { title: '', data: [] } });
 
-    // Categorize the filtered data
-    return filteredData.reduce((acc, curr) => {
-      const category = curr.category;
-      const updatedAcc: CategorizedData = { ...acc };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch data from /products/search
+        const productsResponse = await fetch(`${API_URL}/products/search?query=${searchResult}`, { cache: "no-cache" });
+        const productsData = await productsResponse.json() as DataPromise[];
 
-      if (!updatedAcc[category]) {
-        updatedAcc[category] = [curr];
-      } else {
-        updatedAcc[category].push(curr);
+        // Fetch data from /locations/search
+        const locationsResponse = await fetch(`${API_URL}/locations/search?query=${searchResult}`, { cache: "no-cache" });
+        const locationsData = await locationsResponse.json() as DataPromise[];
+
+        // Check if both product and location data are available before combining
+        if (productsData.length > 0 || locationsData.length > 0) {
+          // Combine results
+          const combinedResults = {
+            product: {
+              title: "Products",
+              data: productsData
+            },
+            location: {
+              title: "Locations",
+              data: locationsData
+            }
+          };
+          setFilteredData(combinedResults);
+        } else {
+          // No results found for both product and location, reset data
+          setFilteredData({ product: { title: '', data: [] }, location: { title: '', data: [] } });
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
-      return updatedAcc;
-    }, {});
+    };
+
+    const debouncedFetchData = debounce(fetchData, 3000);
+
+    if (searchResult) {
+      debouncedFetchData();
+    } else {
+      // Reset data if searchResult is empty
+      setFilteredData({ product: { title: '', data: [] }, location: { title: '', data: [] } });
+    }
   }, [searchResult]);
 
   return (
@@ -209,31 +133,34 @@ export default function SearchNavbar({
             )}
           >
             {/* Case not found matches */}
-            {Object.entries(categorizeFilteredData).length === 0 && Boolean(searchResult) ? (
+            {filteredData && Boolean(filteredData) && Object.keys(filteredData).every((key: string) => {
+              const validKeys: ("product" | "location")[] = ["product", "location"];
+              return validKeys.includes(key as ResultKeys) && filteredData[key as ResultKeys]?.data.length === 0;
+            }) && Boolean(searchResult) ? (
               <p className='text-center text-lg font-semibold text-black lg:text-xl xl:text-2xl 2xl:text-3xl '>
                 Not Result Found for {'"' + searchResult + '"'}
               </p>
             ) : (
               Boolean(searchResult) &&
               // Case found matches mapping based on category
-              Object.entries(categorizeFilteredData).map(
-                ([category, products]) => (
+              Object.entries(filteredData || {}).map(
+                ([category, { title, data }]) => (
                   <div className={clsx('flex flex-col gap-4 xl:gap-6', !searchResult && "hidden")} key={category}>
                     <p className='text-lg font-semibold text-black lg:text-xl xl:text-2xl 2xl:text-3xl'>
-                      {category + ' (' + products.length + ')'}
+                      {title + ' (' + data.length + ')'}
                     </p>
                     {/* Item in category matches */}
                     <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
-                      {products.map((product) => (
+                      {data.map((item) => (
                         <div
                           className='flex gap-x-4 gap-y-2 xl:gap-x-6'
-                          key={product.name}
+                          key={item.title}
                         >
                           <div className='aspect-square h-fit w-12 flex-shrink-0 rounded-xl bg-gray-2 sm:w-16 sm:rounded-2xl md:rounded-3xl lg:w-20 xl:w-24 2xl:w-28' />
                           <div className='flex flex-col'>
-                            <p className='font-medium'>{product.name}</p>
+                            <p className='font-medium'>{item.title}</p>
                             <p className='text-base lg:text-lg xl:text-xl'>
-                              {currencyFormatter(product.price)}
+                              {item.title === 'Locations' ? item.desc : currencyFormatter(parseInt(item.desc))}
                             </p>
                           </div>
                         </div>
