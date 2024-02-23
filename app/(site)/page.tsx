@@ -54,20 +54,22 @@ export default async function Home() {
     };
   }> = [];
 
-  highlightData.forEach((highlight: any) => {
-    imageLinks.push({
-      imgSrc: highlight.prod_main_img,
-      product: {
-        id: highlight.prod_id,
-        title: highlight.prod_name,
-        subTitle: `Rp. ${highlight.prod_price.toLocaleString('id-ID')}`,
-        action1Label: 'Shop Now',
-        action2Label: 'Shop Detail',
-        action1OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'white' }}>Shop Now</Link>,
-        action2OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'black' }}>Shop Detail</Link>,
-      }
+  if (Array.isArray(highlightData)) {
+    highlightData.forEach((highlight: any) => {
+      imageLinks.push({
+        imgSrc: highlight.prod_main_img,
+        product: {
+          id: highlight.prod_id,
+          title: highlight.prod_name,
+          subTitle: `Rp. ${highlight.prod_price.toLocaleString('id-ID')}`,
+          action1Label: 'Shop Now',
+          action2Label: 'Shop Detail',
+          action1OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'white' }}>Shop Now</Link>,
+          action2OnClick: <Link href={`/product/${highlight.prod_id}`} style={{ color: 'black' }}>Shop Detail</Link>,
+        }
+      });
     });
-  });
+  }
 
   const renderImageLinks = () => {
     const rows: JSX.Element[] = [];

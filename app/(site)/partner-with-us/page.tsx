@@ -5,7 +5,7 @@ import React from 'react';
 
 const PartnerWithUsPage: React.FC = () => {
     return (
-        <>
+        <main className='flex min-h-screen flex-col gap-5 px-8 py-8 md:px-20 lg:py-10 xl:px-32 xl:py-14 2xl:py-20'>
         <Row gutter={24}>
             <Col className='gutter-row' span={24}>
                 <Typography.Title style={{textAlign: 'center'}}>Tertarik Menjadi Partner Kami ?</Typography.Title>
@@ -97,7 +97,7 @@ const PartnerWithUsPage: React.FC = () => {
                 </Button>
             </Col>
         </Row>
-        </>
+        </main>
     );
 };
 
